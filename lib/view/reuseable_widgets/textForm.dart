@@ -15,6 +15,7 @@ class _TextFormWidgetState extends State<TextFormWidget> {
       child: TextFormField(
 
         decoration: InputDecoration(
+          contentPadding:EdgeInsets.zero,
           prefixIcon: Icon(Icons.search,),
           hintText: "Search for doctors",
           border:OutlineInputBorder(

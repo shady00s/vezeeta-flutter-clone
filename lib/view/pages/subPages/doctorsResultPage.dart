@@ -17,50 +17,58 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
     return Scaffold(
 
       body: Column(
+
         children: [
           // customized app bar
-          InkWell(child: DecoratedBox(
-            decoration:BoxDecoration(
-              color: ColorManager.appBarColor,
-            ),
-            child: SizedBox(
-              height: 80,
+          DecoratedBox(decoration: BoxDecoration(color: ColorManager.appBarColor)
+          ,child: SizedBox(
+              height: 85,
               child: Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.only(top: 35.0,left: 5,right: 45),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment:CrossAxisAlignment.start ,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,),onPressed: ()=>Navigator.pop(context),),
-                    SizedBox(width: (MediaQuery.of(context).size.width /3.6),),
+                    Spacer(),
 
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Searching in",style: TextStyle(fontSize: 11,color: Colors.white),),
-                        SizedBox(height: 8,),
-                        Card(
-                          margin: EdgeInsets.zero,
-                          elevation: 0,
-                          color: Color.fromRGBO(33, 22, 179, 0.7137254901960784),
+                    InkWell(
+                      child:Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("Searching in",style: TextStyle(fontSize: 11,color: Colors.white),),
+                          SizedBox(height: 8,),
+                          SizedBox(
+                            child: Card(
+                              margin: EdgeInsets.zero,
+                              elevation: 0,
+                              color: Color.fromRGBO(33, 22, 179, 0.7137254901960784),
 
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 0),
-                            child: Row(
-                              children: [
-                                Text(widget.cityName,style: TextStyle(fontSize: 12,color: Colors.white),),
-                                Icon(Icons.keyboard_arrow_down_rounded,color: Colors.white,)
-                              ],
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(widget.cityName,style: TextStyle(fontSize: 12,color: Colors.white),),
+                                    Icon(Icons.keyboard_arrow_down_rounded,color: Colors.white,)
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
-                        )
-                      ],
-                    ),
+                          )
+                        ],
+                      )
+                      ,onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SelectCityPage())),
+                    )
+                    ,Spacer()
                   ],
                 ),
               ),
             ),
-          ),onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SelectCityPage())),)
+          )
+
+
 
           // search
           ,TextFormWidget(),
