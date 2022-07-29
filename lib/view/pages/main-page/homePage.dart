@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vezeeta_clone/view/styles/colors.dart';
 
 import '../../styles/textStyle.dart';
+import '../subPages/clinicVisitPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,7 +33,11 @@ class HomePage extends StatelessWidget {
                     height: 100,
                     child: Card(
                       elevation: 0,
-                      child: Column(
+                      child: InkWell(
+                        onTap:(){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ClincVisitPage()));
+                        },
+                        child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image(
@@ -41,8 +47,10 @@ class HomePage extends StatelessWidget {
                           Text("Clinic visit")
                         ],
                       ),
+                      ),
                     ),
                   ),
+
                   SizedBox(
                     width: 100,
                     height: 100,
@@ -300,7 +308,7 @@ class HomePage extends StatelessWidget {
                           height: 80,
                           child: Card(
                             elevation: 0,
-                            color:Color.fromRGBO(171, 213, 248, 0.4392156862745098),
+                            color:ColorManager.lightBlueBackgroundColor,
 
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -319,14 +327,14 @@ class HomePage extends StatelessWidget {
                           height: 80,
                           child: Card(
                             elevation: 0,
-                            color:Color.fromRGBO(171, 213, 248, 0.4392156862745098),
+                            color:ColorManager.lightBlueBackgroundColor,
 
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
 
                               children: [
-                                Icon(Icons.camera_enhance_outlined ,color: Color.fromRGBO(52, 81, 205, 1.0)),
-                                Text("Product Picture",style: TextStyle(color: Color.fromRGBO(52, 81, 205, 1.0)),textAlign: TextAlign.center,)
+                                Icon(Icons.camera_enhance_outlined ,color:  ColorManager.lightBlueTextColor),
+                                Text("Product Picture",style: TextStyle(color:  ColorManager.lightBlueTextColor),textAlign: TextAlign.center,)
                               ],
                             ),
                           ),
@@ -336,14 +344,14 @@ class HomePage extends StatelessWidget {
                           height: 80,
                           child: Card(
                             elevation: 0,
-                            color:Color.fromRGBO(171, 213, 248, 0.4392156862745098),
+                            color:ColorManager.lightBlueBackgroundColor,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
 
                               children: [
-                                Icon(Icons.call,color: Color.fromRGBO(52, 81, 205, 1.0)),
-                                Text("Pharmacist Assistance",textAlign: TextAlign.center,style: TextStyle(color: Color.fromRGBO(52, 81, 205, 1.0)),)
+                                Icon(Icons.call,color: ColorManager.lightBlueTextColor),
+                                Text("Pharmacist Assistance",textAlign: TextAlign.center,style: TextStyle(color:  ColorManager.lightBlueTextColor),)
                               ],
                             ),
                           ),
@@ -377,7 +385,7 @@ class HomePage extends StatelessWidget {
                             elevation: 0,
                             color: Color.fromRGBO(171, 213, 248, 0.4392156862745098),
                             onPressed: () {},
-                            child: Text('Book visit',style:TextStyle(color: Color.fromRGBO(52, 81, 205, 1.0)) ,),
+                            child: Text('Book visit',style:TextStyle(color:  ColorManager.lightBlueTextColor) ,),
                           ),
                         ),
 
@@ -414,7 +422,7 @@ class HomePage extends StatelessWidget {
                               elevation: 0,
                               color: Color.fromRGBO(171, 213, 248, 0.4392156862745098),
                               onPressed: () {},
-                              child: Text('Call Doctor',style:TextStyle(color: Color.fromRGBO(52, 81, 205, 1.0),),
+                              child: Text('Call Doctor',style:TextStyle(color:  ColorManager.lightBlueTextColor,),
                               )) ,
                         )
 
