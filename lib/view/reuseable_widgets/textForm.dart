@@ -11,15 +11,14 @@ class _TextFormWidgetState extends State<TextFormWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 10),
       child: TextFormField(
-
         decoration: InputDecoration(
           contentPadding:EdgeInsets.zero,
           prefixIcon: Icon(Icons.search,),
           hintText: "Search for doctors",
           border:OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(4),
             borderSide: BorderSide(color: Colors.grey)
           ),
             focusedBorder: OutlineInputBorder(

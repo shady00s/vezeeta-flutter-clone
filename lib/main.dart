@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/view/pages/main-page/main-page.dart';
+import 'package:vezeeta_clone/view/styles/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
 
+        scaffoldBackgroundColor: ColorManager.scaffoldBackGroundColor,
+        appBarTheme: AppBarTheme(
+            backgroundColor: ColorManager.appBarColor,
+          elevation: 0
+        ),
         primarySwatch: Colors.blue,
       ),
       home:  Routing(),

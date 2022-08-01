@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/view/pages/main-page/homePage.dart';
 import 'package:vezeeta_clone/view/pages/main-page/profile-page.dart';
+import 'package:vezeeta_clone/view/styles/colors.dart';
 
 import 'activities-page.dart';
 int selectedIndex =0;
@@ -28,7 +29,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(240, 244, 247, 1),
+        backgroundColor: ColorManager.scaffoldBackGroundColor,
         body: _pagesList.elementAt(indexPage),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem> [

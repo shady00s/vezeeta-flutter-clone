@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/view/pages/subPages/selectCityPage.dart';
+import 'package:vezeeta_clone/view/reuseable_widgets/doctorCard.dart';
 import 'package:vezeeta_clone/view/reuseable_widgets/textForm.dart';
 
 import '../../styles/colors.dart';
@@ -16,15 +17,14 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      body: Column(
-
+       body: Column(
         children: [
           // customized app bar
-          DecoratedBox(decoration: BoxDecoration(color: ColorManager.appBarColor)
-          ,child: SizedBox(
+            DecoratedBox(decoration: BoxDecoration(color: ColorManager.appBarColor)
+             ,child: SizedBox(
               height: 85,
               child: Padding(
-                padding: const EdgeInsets.only(top: 35.0,left: 5,right: 45),
+                padding: const EdgeInsets.only(top: 30.0,left: 5,right: 45),
                 child: Row(
                   crossAxisAlignment:CrossAxisAlignment.start ,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -43,7 +43,7 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
                             child: Card(
                               margin: EdgeInsets.zero,
                               elevation: 0,
-                              color: Color.fromRGBO(33, 22, 179, 0.7137254901960784),
+                              color: Color.fromRGBO(3, 94, 179, 0.7137254901960784),
 
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -66,68 +66,77 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
                 ),
               ),
             ),
-          )
-
-
-
-          // search
-          ,TextFormWidget(),
-          //filter buttons
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children:[
-                Expanded(child: OutlinedButton(style: OutlinedButton.styleFrom(elevation: 0 ), onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.sort),Text("Sort")],),)),
-                SizedBox(width: 10,),
-                Expanded(child: OutlinedButton(style:OutlinedButton.styleFrom(elevation: 0 ,),onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.filter_alt_outlined),Text("Filter")]))),
-                SizedBox(width: 10,),
-                Expanded(child: OutlinedButton(style: OutlinedButton.styleFrom(elevation: 0 ,),onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.location_on_rounded),Text("Map")]))),
-              ]
-
-            ),
           ),
-
-          // premium adv
-
           Card(
-            margin: EdgeInsets.all(12),
-            elevation: 0,
-            color: ColorManager.lightBlueBackgroundColor,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0,horizontal: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment:MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment:MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image(image: AssetImage("assets/logo.png"),width: 80,),
-                          SizedBox(width:10 ),
-                          Card(
-                            color: Colors.red,
-                            margin: EdgeInsets.only(top: 6),
+            margin: EdgeInsets.zero,
+            elevation: 3,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+              // search
+              TextFormWidget(),
+              //filter buttons
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:8.0),
+                child: Row(
+                    children:[
+                      Expanded(child: OutlinedButton(style: OutlinedButton.styleFrom(elevation: 0 ), onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.sort),Text("Sort")],),)),
+                      SizedBox(width: 10,),
+                      Expanded(child: OutlinedButton(style:OutlinedButton.styleFrom(elevation: 0 ,),onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.filter_alt_outlined),Text("Filter")]))),
+                      SizedBox(width: 10,),
+                      Expanded(child: OutlinedButton(style: OutlinedButton.styleFrom(elevation: 0 ,),onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.location_on_rounded),Text("Map")]))),
+                    ]
 
-                            child: Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Text("Care",style: TextStyle(color: Colors.white),),
-                            ),
-                          )
+                ),
+              ),
+              // premium adv
+
+              Card(
+                margin: EdgeInsets.symmetric(horizontal: 12 ,vertical: 10),
+                elevation: 0,
+                color: ColorManager.lightBlueBackgroundColor,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 18.0,horizontal: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment:MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image(image: AssetImage("assets/logo.png"),width: 80,),
+                              SizedBox(width:10 ),
+                              Card(
+                                color: Colors.red,
+                                margin: EdgeInsets.only(top: 6),
+
+                                child: Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: Text("Care",style: TextStyle(color: Colors.white),),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 10,),
+                          Text("Save up to 50% of you medical bills.",style: TextStyle(color:  ColorManager.lightBlueTextColor),)
                         ],
                       ),
-                      Text("Save up to 50% of you medical bills.",style: TextStyle(color:  ColorManager.lightBlueTextColor),)
+                      ElevatedButton( style: ElevatedButton.styleFrom(primary: Color.fromRGBO(2, 112, 204, 1)), onPressed: (){}, child: Text("Upgrade",))
                     ],
                   ),
-                  ElevatedButton(onPressed: (){}, child: Text("Upgrade",))
-                ],
+                ),
               ),
-            ),
-          )
+            ],),),
+          Expanded(child:  ListView.builder(
+              itemCount: 12,
+              itemBuilder: (context,index){
+                return DoctorCard();
+              }),)
         ],
       ),
     );
