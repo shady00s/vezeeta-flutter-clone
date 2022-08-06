@@ -3,7 +3,7 @@ import 'package:vezeeta_clone/view/pages/subPages/doctorsResultPage.dart';
 import 'package:vezeeta_clone/view/pages/subPages/selectCityPage.dart';
 import 'package:vezeeta_clone/view/styles/textStyle.dart';
 import 'package:vezeeta_clone/view/styles/colors.dart';
-import '../../reuseable_widgets/textForm.dart';
+import '../../reuseable_widgets/textFormWidget.dart';
 class _DrCategories {
  late final String name;
  late final String ImagePath;
@@ -45,8 +45,8 @@ List<_DrCategories> _Othercategories = [
 
 ];
 
-class ClincVisitPage extends StatelessWidget {
-  const ClincVisitPage({Key? key}) : super(key: key);
+class DoctorCategoriesPage extends StatelessWidget {
+  const DoctorCategoriesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

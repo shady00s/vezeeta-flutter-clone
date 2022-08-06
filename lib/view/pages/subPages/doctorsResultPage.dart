@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:vezeeta_clone/controller/doctorController.dart';
+import 'package:vezeeta_clone/model/doctorModel.dart';
 import 'package:vezeeta_clone/view/pages/subPages/selectCityPage.dart';
-import 'package:vezeeta_clone/view/reuseable_widgets/doctorCard.dart';
-import 'package:vezeeta_clone/view/reuseable_widgets/textForm.dart';
+import 'package:vezeeta_clone/view/reuseable_widgets/doctorCardWidget.dart';
+import 'package:vezeeta_clone/view/reuseable_widgets/textFormWidget.dart';
 
 import '../../styles/colors.dart';
 
@@ -13,10 +15,10 @@ class DocotorsListPage extends StatefulWidget {
 }
 
 class _DocotorsListPageState extends State<DocotorsListPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
        body: Column(
         children: [
           // customized app bar
@@ -132,11 +134,33 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
                 ),
               ),
             ],),),
-          Expanded(child:  ListView.builder(
-              itemCount: 12,
-              itemBuilder: (context,index){
-                return DoctorCard();
-              }),)
+
+          Expanded(child:
+           StreamBuilder<DoctorModel> (
+            stream: DoctorController().getDoctorsByLocationAndSpecialization(),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          DoctorModel doctors = snapshot.data;
+
+                if(snapshot.hasData ) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.active:
+                      return const Center(child: CircularProgressIndicator(),);
+                    case ConnectionState.waiting:
+                      return const Center(child: CircularProgressIndicator(),);
+
+                    case ConnectionState.done:
+                      return ListView.builder(
+                          itemCount: doctors.body!.length,
+                          itemBuilder: (context, index) =>
+                              DoctorCardWidget(doctorData: doctors.body![index],));
+                  }
+                }
+                else{
+                  return const Center(child: CircularProgressIndicator(),);
+                }
+            })
+    )
         ],
       ),
     );

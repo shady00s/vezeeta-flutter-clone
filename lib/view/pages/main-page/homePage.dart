@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/view/styles/colors.dart';
 
 import '../../styles/textStyle.dart';
-import '../subPages/clinicVisitPage.dart';
+import '../subPages/doctorCategoriesPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                       elevation: 0,
                       child: InkWell(
                         onTap:(){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ClincVisitPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DoctorCategoriesPage()));
                         },
                         child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,20 +1,23 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:vezeeta_clone/model/doctorModel.dart';
 import 'package:vezeeta_clone/view/styles/colors.dart';
 
-class AppointmentClass{
-    late final String hour;
-    late final String day;
-    AppointmentClass({required this.hour, required this.day});
-}
+
 
 
 class DoctorDetailsCard extends StatefulWidget {
-  const DoctorDetailsCard({Key? key}) : super(key: key);
-
+  const DoctorDetailsCard({Key? key, required this.doctor}) : super(key: key);
+  final DoctorModel? doctor ;
   @override
   State<DoctorDetailsCard> createState() => _DoctorDetailsCardState();
+}
+
+class AppointmentClass{
+  late final String hour;
+  late final String day;
+  AppointmentClass({required this.hour, required this.day});
 }
 class DoctorInfoTest {
   late final  String clinicLocation;
@@ -27,13 +30,10 @@ class DoctorInfoTest {
 }
 
 
-
-
 class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
   List<DoctorInfoTest> testList =[
     DoctorInfoTest(clinicLocation: "Abbasia", address: "43 abbasia street cairo", fees: "300", availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
     ,DoctorInfoTest(clinicLocation: "Naser city", address: "43 abbasia street cairo", fees: "300", availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
-
   ];
   List<bool>isSelectedList = [true ,false];
 
@@ -67,7 +67,6 @@ class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
                   children:texts,
                 onPressed: (int newIndex){
                     setState(() {
-
                       for(int index = 0; index < isSelectedList.length;index++) {
                         if (index == newIndex) {
                           isSelectedList[index] = true;
