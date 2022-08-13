@@ -6,71 +6,97 @@ import 'package:vezeeta_clone/view/reuseable_widgets/textFormWidget.dart';
 
 import '../../../managers/colorsManager.dart';
 import './selectCityPage.dart';
-
-
+ScrollController _controller = ScrollController();
+int pageNumber = 1;
 class DoctorsListPage extends StatefulWidget {
-  const DoctorsListPage({Key? key,required this.cityName ,required this.specialization}) : super(key: key);
+  const DoctorsListPage(
+      {Key? key, required this.cityName, required this.specialization})
+      : super(key: key);
   final String cityName;
   final String specialization;
+
   @override
   State<DoctorsListPage> createState() => _DoctorsListPageState();
 }
 
 class _DoctorsListPageState extends State<DoctorsListPage> {
-@override
-  void initState() {
 
-    // TODO: implement initState
+
+  @override
+  void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: Column(
+      body: Column(
         children: [
           // customized app bar
-            DecoratedBox(decoration: BoxDecoration(color: ColorManager.appBarColor)
-             ,child: SizedBox(
+          DecoratedBox(
+            decoration: BoxDecoration(color: ColorManager.appBarColor),
+            child: SizedBox(
               height: 85,
               child: Padding(
-                padding: const EdgeInsets.only(top: 30.0,left: 5,right: 45),
+                padding: const EdgeInsets.only(top: 30.0, left: 5, right: 45),
                 child: Row(
-                  crossAxisAlignment:CrossAxisAlignment.start ,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,),onPressed: ()=>Navigator.pop(context),),
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
                     Spacer(),
-
                     InkWell(
-                      child:Column(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("Searching in",style: TextStyle(fontSize: 11,color: Colors.white),),
-                          SizedBox(height: 8,),
+                          Text(
+                            "Searching in",
+                            style: TextStyle(fontSize: 11, color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
                           SizedBox(
                             child: Card(
                               margin: EdgeInsets.zero,
                               elevation: 0,
-                              color: Color.fromRGBO(3, 94, 179, 0.7137254901960784),
-
+                              color: Color.fromRGBO(
+                                  3, 94, 179, 0.7137254901960784),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(widget.cityName,style: TextStyle(fontSize: 12,color: Colors.white),),
-                                    Icon(Icons.keyboard_arrow_down_rounded,color: Colors.white,)
+                                    Text(
+                                      widget.cityName,
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.white),
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                      color: Colors.white,
+                                    )
                                   ],
                                 ),
                               ),
                             ),
                           )
                         ],
-                      )
-                      ,onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const SelectCityPage())),
-                    )
-                    ,const Spacer()
+                      ),
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SelectCityPage())),
+                    ),
+                    const Spacer()
                   ],
                 ),
               ),
@@ -82,96 +108,198 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-              // search
-              TextFormWidget(),
-              //filter buttons
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal:8.0),
-                child: Row(
-                    children:[
-                      Expanded(child: OutlinedButton(style: OutlinedButton.styleFrom(elevation: 0 ), onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.sort),Text("Sort")],),)),
-                      const SizedBox(width: 10,),
-                      Expanded(child: OutlinedButton(style:OutlinedButton.styleFrom(elevation: 0 ,),onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.filter_alt_outlined),Text("Filter")]))),
-                      const SizedBox(width: 10,),
-                      Expanded(child: OutlinedButton(style: OutlinedButton.styleFrom(elevation: 0 ,),onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.location_on_rounded),Text("Map")]))),
-                    ]
-
-                ),
-              ),
-              // premium adv
-
-              Card(
-                margin: const EdgeInsets.symmetric(horizontal: 12 ,vertical: 10),
-                elevation: 0,
-                color: ColorManager.lightBlueBackgroundColor,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 18.0,horizontal: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment:MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image(image: AssetImage("assets/logo.png"),width: 80,),
-                              SizedBox(width:10 ),
-                              Card(
-                                color: Colors.red,
-                                margin: EdgeInsets.only(top: 6),
-
-                                child: Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: Text("Care",style: TextStyle(color: Colors.white),),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 10,),
-                          Text("Save up to 50% of you medical bills.",style: TextStyle(color:  ColorManager.lightBlueTextColor),)
-                        ],
+                // search
+                TextFormWidget(),
+                //filter buttons
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(children: [
+                    Expanded(
+                        child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(elevation: 0),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [Icon(Icons.sort), Text("Sort")],
                       ),
-                      ElevatedButton( style: ElevatedButton.styleFrom(primary: Color.fromRGBO(2, 112, 204, 1)), onPressed: (){}, child: Text("Upgrade",))
-                    ],
+                    )),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                        child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              elevation: 0,
+                            ),
+                            onPressed: () {},
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Icon(Icons.filter_alt_outlined),
+                                  Text("Filter")
+                                ]))),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                        child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              elevation: 0,
+                            ),
+                            onPressed: () {},
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Icon(Icons.location_on_rounded),
+                                  Text("Map")
+                                ]))),
+                  ]),
+                ),
+                // premium adv
+
+                Card(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  elevation: 0,
+                  color: ColorManager.lightBlueBackgroundColor,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 18.0, horizontal: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image(
+                                  image: AssetImage("assets/logo.png"),
+                                  width: 80,
+                                ),
+                                SizedBox(width: 10),
+                                Card(
+                                  color: Colors.red,
+                                  margin: EdgeInsets.only(top: 6),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Text(
+                                      "Care",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Save up to 50% of you medical bills.",
+                              style: TextStyle(
+                                  color: ColorManager.lightBlueTextColor),
+                            )
+                          ],
+                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color.fromRGBO(2, 112, 204, 1)),
+                            onPressed: () {},
+                            child: Text(
+                              "Upgrade",
+                            ))
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],),),
-          Expanded(child:
-          StreamBuilder<List<dynamic>>(
-            stream: DoctorController().doctorDataResult(),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              ],
+            ),
+          ),
 
-            switch (snapshot.connectionState){
-              case ConnectionState.none:
+          // StreamBuilder<List<Body>>(
+          //     stream:DoctorController().doctorWithModel() ,
+          //     builder: (context,snapshot){
+          //         switch (snapshot.connectionState){
+          //
+          //           case ConnectionState.none:
+          //
+          //           case ConnectionState.waiting:
+          //             return const Center(child: CircularProgressIndicator(),);
+          //           case ConnectionState.active:
+          //           case ConnectionState.done:
+          //           if(snapshot.hasData){
+          //             List<Body> x = snapshot.data!;
+          //
+          //             print(x.map((e) => print(e)));
+          //           return Text(x[0].doctorName![0].englishName!);
+          //           }else{
+          //             return Text("No connection");
+          //           }
+          //         }
+          //
+          // }),
+          //
 
-              case ConnectionState.waiting:
-                return const Center(child: CircularProgressIndicator(),);
-              case ConnectionState.active:
-                return const Center(child: Text("activated"),);
-              case ConnectionState.done:
-                if(snapshot.hasData ){
-                  List<dynamic> data = snapshot.data;
+          SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child:  StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
 
+              return  StreamBuilder<List<dynamic>>(
 
+                  stream: DoctorController().doctorDataResult(pageNumber),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
 
-                  return   ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context,index){
-                    return DoctorCardWidget(doctorData: data[index]);
-                  });
-                }else{
-                  return const Center(child: Text("there is no data"),);
-                }
+                      case ConnectionState.waiting:
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      case ConnectionState.active:
+                        return const Center(
+                          child: Text("activated"),
+                        );
+                      case ConnectionState.done:
+                        if (snapshot.hasData) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
 
-            }
-          },)
-          )
-         ],
+                            _controller.addListener(() {
+                              if (_controller.position.pixels >= _controller.position.maxScrollExtent) {
+                                setState(() {
+                                  pageNumber  ++;
+                                  print(pageNumber);
+                                });
+
+                              }
+                            });
+
+                          });
+                          List<dynamic> data = snapshot.data;
+
+                          return ListView.builder(
+                              controller: _controller,
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                return DoctorCardWidget(doctorData: data[index]);
+                              });
+                        } else {
+                          return const Center(
+                            child: Text("there is no data"),
+                          );
+                        }
+                    }
+                  },
+                );
+              },)
+              )
+        ],
       ),
     );
   }
