@@ -1,46 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:vezeeta_clone/view/pages/subPages/doctorsResultPage.dart';
-import 'package:vezeeta_clone/view/pages/subPages/selectCityPage.dart';
-import 'package:vezeeta_clone/view/styles/textStyle.dart';
-import 'package:vezeeta_clone/view/styles/colors.dart';
-import '../../reuseable_widgets/textFormWidget.dart';
-class _DrCategories {
- late final String name;
- late final String ImagePath;
- _DrCategories(  this.name, this.ImagePath);
-}
-List<_DrCategories> _categories = [
-  _DrCategories("Dermatology","sadasds"),
-  _DrCategories("Dentistry","sadasds"),
-  _DrCategories("Psychiatry","sadasds"),
-  _DrCategories("Pediatrics and New Born","sadasds"),
-  _DrCategories("Neurology","sadasds"),
-  _DrCategories("Orthopedics","sadasds"),
-  _DrCategories("Gynaecology and Infertility","sadasds"),
-  _DrCategories("Ear,Nose and Throat","sadasds"),
-  _DrCategories("Cardiology and Vascular Disease","sadasds"),
-  _DrCategories("Allergy abd Immunology","sadasds"),
+
+import '../../../managers/colorsManager.dart';
+import '../../../managers/textStyleManager.dart';
+import '../../../reuseable_widgets/textFormWidget.dart';
+import './selectCityPage.dart';
+
+List<String> _categories = [
+  "Dermatology",
+  "Dentistry",
+  "Psychiatry",
+  "Pediatrics and New Born",
+  "Neurology",
+  "Orthopedics",
+  "Gynaecology and Infertility",
+  "Ear,Nose and Throat",
+  "Cardiology and Vascular Disease",
+  "Allergy abd Immunology",
 
 ];
 
-List<_DrCategories> _Othercategories = [
-  _DrCategories("Andrology and Male Infertility","sadasds"),
-  _DrCategories("Audiology","sadasds"),
-  _DrCategories("Cariology and Thoracic Surgery","sadasds"),
-  _DrCategories("Chest and Respiratory","sadasds"),
-  _DrCategories("Diabetes and Endocrinology","sadasds"),
-  _DrCategories("Diagnostic Radiology","sadasds"),
-  _DrCategories("Dietitian and Nutrition","sadasds"),
-  _DrCategories("Family Medicine","sadasds"),
-  _DrCategories("Gastroenterology and Endoscopy","sadasds"),
-  _DrCategories("General Surgery","sadasds"),
-  _DrCategories("Geriatrics","sadasds"),
-  _DrCategories("Hematology","sadasds"),
-  _DrCategories("Internal Medicine","sadasds"),
-  _DrCategories("IVF and Infertility","sadasds"),
-  _DrCategories("Laboratories","sadasds"),
-  _DrCategories("Neurosurgery","sadasds"),
-  _DrCategories("Obesity and Laparoscopic Surgery","sadasds"),
+List<String> _Othercategories = [
+  "Andrology and Male Infertility",
+  "Audiology",
+  "Cariology and Thoracic Surgery",
+  "Chest and Respiratory",
+  "Diabetes and Endocrinology",
+  "Diagnostic Radiology",
+  "Dietitian and Nutrition",
+  "Family Medicine",
+  "Gastroenterology and Endoscopy",
+  "General Surgery",
+  "Geriatrics",
+  "Hematology",
+  "Internal Medicine",
+  "IVF and Infertility",
+  "Laboratories",
+  "Neurosurgery",
+  "Obesity and Laparoscopic Surgery",
 
 
 ];
@@ -84,12 +80,12 @@ class DoctorCategoriesPage extends StatelessWidget {
                             child:
                             InkWell(
                               onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> SelectCityPage()
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> SelectCityPage(specialization: _categories[index],)
                                 ));
                               },
                               child: Row(
                                 children: [
-                                  Text(_categories[index].name.toString()),
+                                  Text(_categories[index]),
                                 ],
                               ),
                             ),
@@ -115,11 +111,11 @@ class DoctorCategoriesPage extends StatelessWidget {
                             child:
                             InkWell(
                               onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> SelectCityPage()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> SelectCityPage(specialization: _Othercategories[index],)));
                               },
                               child: Row(
                                 children: [
-                                  Text(_Othercategories[index].name.toString()),
+                                  Text(_Othercategories[index]),
                                 ],
                               ),
                             ),

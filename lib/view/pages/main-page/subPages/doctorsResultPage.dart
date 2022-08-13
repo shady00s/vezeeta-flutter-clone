@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/controller/doctorController.dart';
 import 'package:vezeeta_clone/model/doctorModel.dart';
-import 'package:vezeeta_clone/view/pages/subPages/selectCityPage.dart';
 import 'package:vezeeta_clone/view/reuseable_widgets/doctorCardWidget.dart';
 import 'package:vezeeta_clone/view/reuseable_widgets/textFormWidget.dart';
 
-import '../../styles/colors.dart';
+import '../../../managers/colorsManager.dart';
+import './selectCityPage.dart';
 
-class DocotorsListPage extends StatefulWidget {
-  const DocotorsListPage({Key? key,required this.cityName}) : super(key: key);
+
+class DoctorsListPage extends StatefulWidget {
+  const DoctorsListPage({Key? key,required this.cityName ,required this.specialization}) : super(key: key);
   final String cityName;
+  final String specialization;
   @override
-  State<DocotorsListPage> createState() => _DocotorsListPageState();
+  State<DoctorsListPage> createState() => _DoctorsListPageState();
 }
 
-class _DocotorsListPageState extends State<DocotorsListPage> {
+class _DoctorsListPageState extends State<DoctorsListPage> {
+@override
+  void initState() {
 
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,9 +68,9 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
                           )
                         ],
                       )
-                      ,onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SelectCityPage())),
+                      ,onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const SelectCityPage())),
                     )
-                    ,Spacer()
+                    ,const Spacer()
                   ],
                 ),
               ),
@@ -83,9 +90,9 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
                 child: Row(
                     children:[
                       Expanded(child: OutlinedButton(style: OutlinedButton.styleFrom(elevation: 0 ), onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.sort),Text("Sort")],),)),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Expanded(child: OutlinedButton(style:OutlinedButton.styleFrom(elevation: 0 ,),onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.filter_alt_outlined),Text("Filter")]))),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Expanded(child: OutlinedButton(style: OutlinedButton.styleFrom(elevation: 0 ,),onPressed: (){}, child: Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Icon(Icons.location_on_rounded),Text("Map")]))),
                     ]
 
@@ -94,7 +101,7 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
               // premium adv
 
               Card(
-                margin: EdgeInsets.symmetric(horizontal: 12 ,vertical: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 12 ,vertical: 10),
                 elevation: 0,
                 color: ColorManager.lightBlueBackgroundColor,
                 child: Padding(
@@ -134,34 +141,37 @@ class _DocotorsListPageState extends State<DocotorsListPage> {
                 ),
               ),
             ],),),
-
           Expanded(child:
-           StreamBuilder<DoctorModel> (
-            stream: DoctorController().getDoctorsByLocationAndSpecialization(),
+          StreamBuilder<List<dynamic>>(
+            stream: DoctorController().doctorDataResult(),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          DoctorModel doctors = snapshot.data;
 
-                if(snapshot.hasData ) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.active:
-                      return const Center(child: CircularProgressIndicator(),);
-                    case ConnectionState.waiting:
-                      return const Center(child: CircularProgressIndicator(),);
+            switch (snapshot.connectionState){
+              case ConnectionState.none:
 
-                    case ConnectionState.done:
-                      return ListView.builder(
-                          itemCount: doctors.body!.length,
-                          itemBuilder: (context, index) =>
-                              DoctorCardWidget(doctorData: doctors.body![index],));
-                  }
+              case ConnectionState.waiting:
+                return const Center(child: CircularProgressIndicator(),);
+              case ConnectionState.active:
+                return const Center(child: Text("activated"),);
+              case ConnectionState.done:
+                if(snapshot.hasData ){
+                  List<dynamic> data = snapshot.data;
+
+
+
+                  return   ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context,index){
+                    return DoctorCardWidget(doctorData: data[index]);
+                  });
+                }else{
+                  return const Center(child: Text("there is no data"),);
                 }
-                else{
-                  return const Center(child: CircularProgressIndicator(),);
-                }
-            })
-    )
-        ],
+
+            }
+          },)
+          )
+         ],
       ),
     );
   }

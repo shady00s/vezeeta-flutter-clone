@@ -2,14 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/model/doctorModel.dart';
-import 'package:vezeeta_clone/view/styles/colors.dart';
+
+import '../managers/colorsManager.dart';
 
 
 
 
 class DoctorDetailsCard extends StatefulWidget {
-  const DoctorDetailsCard({Key? key, required this.doctor}) : super(key: key);
-  final DoctorModel? doctor ;
+  const DoctorDetailsCard({Key? key, }) : super(key: key);
+
   @override
   State<DoctorDetailsCard> createState() => _DoctorDetailsCardState();
 }

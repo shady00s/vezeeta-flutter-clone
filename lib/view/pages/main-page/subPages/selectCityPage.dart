@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vezeeta_clone/view/styles/colors.dart';
 
+import '../../../managers/colorsManager.dart';
 import 'doctorsResultPage.dart';
 
 class _Cities{
@@ -39,8 +39,8 @@ List<_Cities> _citiesList=[
 ];
 
 class SelectCityPage extends StatelessWidget {
-  const SelectCityPage({Key? key}) : super(key: key);
-
+  const SelectCityPage({Key? key, this.specialization}) : super(key: key);
+  final String? specialization;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +65,7 @@ class SelectCityPage extends StatelessWidget {
                child:
                InkWell(
                  onTap: (){
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=> DocotorsListPage(cityName:_citiesList[index].cityName)
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=> DoctorsListPage(cityName:_citiesList[index].cityName, specialization: specialization!,)
                    ));
                  },
                  child:

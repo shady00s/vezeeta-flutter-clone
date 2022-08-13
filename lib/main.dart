@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vezeeta_clone/view/managers/colorsManager.dart';
 import 'package:vezeeta_clone/view/pages/main-page/main-page.dart';
-import 'package:vezeeta_clone/view/styles/colors.dart';
+import 'package:vezeeta_clone/view/reusable_screens/introSplashScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +38,15 @@ class Routing extends StatefulWidget {
 
 class _RoutingState extends State<Routing> {
   @override
+  bool isLoading = true;
+  demoIntroSplashScreen(){
+    Future.delayed(const Duration(seconds: 3) ).then((value) => setState((){
+      isLoading = false;
+    }));
+  }
   Widget build(BuildContext context) {
-    return MainPage();
+    demoIntroSplashScreen();
+   
+    return   isLoading?  const IntroSplashScreen():   MainPage();
   }
 }

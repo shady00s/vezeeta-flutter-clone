@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/view/pages/main-page/homePage.dart';
 import 'package:vezeeta_clone/view/pages/main-page/profile-page.dart';
-import 'package:vezeeta_clone/view/styles/colors.dart';
-
+import '../../managers/colorsManager.dart';
 import 'activities-page.dart';
 int selectedIndex =0;
 

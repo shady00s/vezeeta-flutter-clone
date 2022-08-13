@@ -4,42 +4,29 @@ import 'package:dio/dio.dart';
 import '../model/doctorModel.dart';
 
 class DoctorController{
-  late bool isLoading ;
-  final Dio _dio = Dio();
-  Stream <DoctorModel> getDoctorsByLocationAndSpecialization() async*{
+  Stream<List<dynamic>  >  doctorDataResult () async*{
+    print("opining stream");
+    List<dynamic> result = [];
+     await DioController().getDoctors("/user-doctor-search").then((value) {
+       value.data["body"].forEach((e)=> result.add(e));
+
+     });
 
 
-    try {
-
-      var values = await _dio.get('http://10.0.2.2:4500/doctors',queryParameters: {
-            "specialization": "cardiology",
-            "location": "cairo"
-          });
-
-      DoctorModel doc = DoctorModel.fromJson(values.data);
-
-      print(doc);
-      yield doc;
-    }catch(e)
-    {
-      print(e);
-    }
-
+  yield result;
   }
-
-Stream<DoctorModel> getDoctorInformation(String? doctorID) async*{
-      DoctorModel doctorDetails ;
-      final String _path = 'http://10.0.2.2:4500/doctors';
-
-        var result =  await _dio.get(_path+doctorID!,);
-
-        doctorDetails = result.data;
-
-        print(doctorDetails);
-        yield doctorDetails;
-
-      }
-
-
 }
 
+class DioController{
+
+  Dio dio = Dio(BaseOptions(
+    baseUrl: "http://10.0.2.2:4500",
+        receiveDataWhenStatusError: true
+  ));
+
+  Future<Response>getDoctors(String url) async{
+    print("opining dio");
+
+    return  await  dio.get(url);
+  }
+}
