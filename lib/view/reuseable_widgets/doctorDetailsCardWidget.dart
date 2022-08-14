@@ -1,5 +1,7 @@
 
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/model/doctorModel.dart';
 
@@ -32,15 +34,15 @@ class DoctorInfoTest {
 
 
 class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
-
+  Random random =  Random();
   List<bool>isSelectedList = [true ,false];
-
+  int clinicIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     List<DoctorInfoTest> testList =[
-      DoctorInfoTest(clinicLocation: widget.doctor.doctorClinics![0].place![0].placeEnglish!, address: "23 ${widget.doctor.doctorClinics![0].place![0].placeEnglish!}floor 4", fees: widget.doctor.fees!, availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
-      ,DoctorInfoTest(clinicLocation: widget.doctor.doctorClinics![1].place![1].placeEnglish!, address: "23 ${widget.doctor.doctorClinics![1].place![1].placeEnglish!}floor 24", fees: widget.doctor.fees!, availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
+      DoctorInfoTest(clinicLocation: widget.doctor.doctorClinics![0].place![0].placeEnglish!, address: " 12th  ${widget.doctor.doctorClinics![0].place![0].placeEnglish!}, floor 12",  fees: widget.doctor.fees!, availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
+      ,DoctorInfoTest(clinicLocation: widget.doctor.doctorClinics![1].place![1].placeEnglish!, address: "30th ${widget.doctor.doctorClinics![1].place![1].placeEnglish!}, floor 31",  fees: widget.doctor.fees!, availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
     ];
     List<Widget> texts = testList.map((e) =>  Padding(
       padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width /12 ,vertical: 2),
@@ -53,7 +55,6 @@ class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
 
         children: [
          //clinic locations
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
             child: SizedBox(
@@ -72,9 +73,11 @@ class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
                       for(int index = 0; index < isSelectedList.length;index++) {
                         if (index == newIndex) {
                           isSelectedList[index] = true;
+                          clinicIndex = newIndex;
                         }
                         else {
                           isSelectedList[index] = false;
+                          clinicIndex = newIndex;
                         }
                       }
                     });
@@ -85,6 +88,46 @@ class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
           ),
 
 
+          // clinic info
+        // fees
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+
+              children:  [
+                const Icon(Icons.wallet,color: ColorManager.lightBlueTextColor,),
+                const SizedBox(width: 15,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${testList[clinicIndex].fees} EGP"),
+                    const SizedBox(height: 10,),
+                    const Text("Consultant fees" ,style: TextStyle(color: Colors.grey),)
+                  ],
+                )
+              ],
+            ),
+          ),
+
+          // address
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+
+              children:  [
+                const Icon(Icons.wallet,color: ColorManager.lightBlueTextColor,),
+                const SizedBox(width: 15,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(testList[clinicIndex].address),
+                    const SizedBox(height: 10,),
+                    const Text("Book and you will receive the address details." ,style: TextStyle(color: Colors.grey),)
+                  ],
+                )
+              ],
+            ),
+          )
 
         ],
       ),
