@@ -1,14 +1,300 @@
-// To parse this JSON data, do
+// class DoctorModel {
+//   dynamic page;
+//   int totalPages;
+//   int totalDoctors;
+//   List<Body> body;
 //
-//     final doctorModel = doctorModelFromJson(jsonString);
-
-import 'dart:convert';
-
-DoctorModel doctorModelFromJson(String str) => DoctorModel.fromJson(json.decode(str));
-
-String doctorModelToJson(DoctorModel data) => json.encode(data.toJson());
-
+//   DoctorModel({
+//     required this.page,
+//     required this.totalPages,
+//     required this.totalDoctors,
+//     required this.body,
+//   });
+//
+//   factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
+//         page: json['page'],
+//         totalPages: json['total_pages'],
+//         totalDoctors: json['total_doctors'],
+//         body: (json['body'])
+//             .map((dynamic e) => Body.fromJson(e as Map<String, dynamic>))
+//             .toList(),
+//       );
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> json = <String, dynamic>{};
+//     json['page'] = page;
+//     json['total_pages'] = totalPages;
+//     json['total_doctors'] = totalDoctors;
+//     json['body'] = body.map((e) => e.toJson()).toList();
+//     return json;
+//   }
+// }
+//
+// class Body {
+//   dynamic id;
+//   List<DoctorName> doctorName;
+//   String doctorEmail;
+//   String doctorGender;
+//   List<DoctorSpecialization> doctorSpecialization;
+//   String doctorLocation;
+//   List<DoctorClinics> doctorClinics;
+//   dynamic doctorRating;
+//   String certificateImagePath;
+//   String profileImagePath;
+//   List<dynamic> clinicImagesPath;
+//   String profileStatus;
+//   dynamic fees;
+//   List<dynamic> doctorPadges;
+//   dynamic clinicWaitingTime;
+//   dynamic voting;
+//
+//
+//   Body({
+//     required this.id,
+//     required this.doctorName,
+//     required this.doctorEmail,
+//     required this.doctorGender,
+//     required this.doctorSpecialization,
+//     required this.doctorLocation,
+//     required this.doctorClinics,
+//     required this.doctorRating,
+//     required this.certificateImagePath,
+//     required this.profileImagePath,
+//     required this.clinicImagesPath,
+//     required this.profileStatus,
+//     required this.fees,
+//     required this.doctorPadges,
+//     required this.clinicWaitingTime,
+//     required this.voting,
+//
+//   });
+//
+//   factory Body.fromJson(Map<String, dynamic> json) => Body(
+//         id: json['_id'],
+//         doctorName: (json['doctorName'])
+//             .map((dynamic e) => DoctorName.fromJson(e as Map<String, dynamic>))
+//             .toList(),
+//         doctorEmail: json['doctorEmail'],
+//         doctorGender: json['doctorGender'],
+//         doctorSpecialization: (json['doctorSpecialization'])
+//             .map((dynamic e) =>
+//                 DoctorSpecialization.fromJson(e as Map<String, dynamic>))
+//             .toList(),
+//         doctorLocation: json['doctorLocation'],
+//         doctorClinics: (json['doctorClinics'])
+//             .map((dynamic e) =>
+//                 DoctorClinics.fromJson(e as Map<String, dynamic>))
+//             .toList(),
+//         doctorRating: json['doctorRating'],
+//         certificateImagePath: json['certificateImagePath'],
+//         profileImagePath: json['profileImagePath'],
+//         clinicImagesPath: (json['clinicImagesPath'])
+//             .map((dynamic e) =>
+//                 ClinicImagesPath.fromJson(e as Map<String, dynamic>))
+//             .toList(),
+//         profileStatus: json['profileStatus'],
+//         fees: json['fees'],
+//         doctorPadges: (json['doctorPadges']).map((e) => e as String).toList(),
+//         clinicWaitingTime: json['clinicWaitingTime'],
+//         voting: json['voting'],
+//
+//       );
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> json = <String, dynamic>{};
+//     json['_id'] = id;
+//     json['doctorName'] = doctorName.map((e) => e.toJson()).toList();
+//     json['doctorEmail'] = doctorEmail;
+//     json['doctorGender'] = doctorGender;
+//     json['doctorSpecialization'] =
+//         doctorSpecialization.map((e) => e.toJson()).toList();
+//     json['doctorLocation'] = doctorLocation;
+//     json['doctorClinics'] = doctorClinics.map((e) => e.toJson()).toList();
+//     json['doctorRating'] = doctorRating;
+//     json['certificateImagePath'] = certificateImagePath;
+//     json['profileImagePath'] = profileImagePath;
+//     json['clinicImagesPath'] = clinicImagesPath.map((e) => e.toJson()).toList();
+//     json['profileStatus'] = profileStatus;
+//     json['fees'] = fees;
+//     json['doctorPadges'] = doctorPadges;
+//     json['clinicWaitingTime'] = clinicWaitingTime;
+//     json['voting'] = voting;
+//
+//     return json;
+//   }
+// }
+//
+// class DoctorName {
+//   String arabicName;
+//   String englishName;
+//   DoctorName({required this.arabicName, required this.englishName});
+//
+//   factory DoctorName.fromJson(Map<String, dynamic> json) => DoctorName(
+//         arabicName: json['arabicName'],
+//         englishName: json['englishName'],
+//       );
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> json = <String, dynamic>{};
+//     json['arabicName'] = arabicName;
+//     return json;
+//   }
+// }
+//
+// class DoctorSpecialization {
+//   dynamic specializationEnglish;
+//   dynamic specializationArabic;
+//   DoctorSpecialization(
+//       {required this.specializationEnglish,
+//       required this.specializationArabic});
+//
+//   factory DoctorSpecialization.fromJson(Map<String, dynamic> json) =>
+//       DoctorSpecialization(
+//           specializationEnglish: json['specialization_english'],
+//           specializationArabic: json['specialization_arabic']);
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> json = <String, dynamic>{};
+//     json['specialization_english'] = specializationEnglish;
+//     return json;
+//   }
+// }
+//
+// class DoctorClinics {
+//   List<dynamic> clinicAppointment;
+//   List<dynamic> place;
+//
+//   DoctorClinics({
+//     required this.clinicAppointment,
+//     required this.place,
+//   });
+//
+//   factory DoctorClinics.fromJson(Map<String, dynamic> json) => DoctorClinics(
+//         clinicAppointment: (json['clinicAppointment'])
+//             .map((dynamic e) =>
+//                 ClinicAppointment.fromJson(e as Map<String, dynamic>))
+//             .toList(),
+//         place: (json['place'] as List)
+//             .map((dynamic e) => Place.fromJson(e as Map<String, dynamic>))
+//             .toList(),
+//       );
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> json = <String, dynamic>{};
+//     json['clinicAppointment'] =
+//         clinicAppointment.map((e) => e.toJson()).toList();
+//     json['place'] = place.map((e) => e.toJson()).toList();
+//     return json;
+//   }
+// }
+//
+// class ClinicAppointment {
+//   dynamic time1;
+//   dynamic day1;
+//   dynamic time2;
+//   dynamic day2;
+//   dynamic time3;
+//   dynamic day3;
+//   dynamic sectime1;
+//   dynamic secday1;
+//   dynamic sectime2;
+//   dynamic secday2;
+//   dynamic sectime3;
+//   dynamic secday3;
+//
+//   ClinicAppointment(
+//       {required this.time1,
+//       required this.day1,
+//       required this.day2,
+//       required this.day3,
+//       required this.time2,
+//       required this.time3,
+//       required this. sectime1  ,
+//       required this.secday1,
+//       required this.sectime2,
+//       required this.secday2,
+//       required this.sectime3,
+//       required this.secday3,
+//
+//
+//
+//       });
+//
+//   factory ClinicAppointment.fromJson(Map<String, dynamic> json) =>
+//       ClinicAppointment(
+//           time1: json['time1'],
+//           day1: json['day1'],
+//           time2: json['time2'],
+//           day2: json['day2'],
+//           time3: json['time3'],
+//           day3: json['day3'],
+//           sectime1:  json['sectime1'] ,
+//         secday1: json['secday1'],
+//         sectime2: json['sectime2'],
+//         secday2: json['secday2'],
+//         sectime3: json['sectime3'],
+//         secday3: json['secday3'],
+//
+//       );
+//
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> json = <String, dynamic>{};
+//     json['time1'] = time1;
+//     json['day1'] = day1;
+//     return json;
+//   }
+// }
+//
+// class Place {
+//   dynamic placeEnglish;
+//   dynamic placeArabic;
+//   dynamic clinicEnglishName;
+//   dynamic clinicArabicName;
+//   Place(
+//       {required this.placeEnglish,
+//       required this.placeArabic,
+//       required this.clinicArabicName,
+//       required this.clinicEnglishName});
+//
+//   factory Place.fromJson(Map<String, dynamic> json) => Place(
+//       placeArabic: json['placeArabic'],
+//       placeEnglish: json['placeEnglish'],
+//       clinicEnglishName: json['clinicEnglishName'],
+//       clinicArabicName: json['clinicArabicName']);
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> json = <String, dynamic>{};
+//     json['placeEnglish'] = placeEnglish;
+//     json['placeArabic'] = placeArabic;
+//     return json;
+//   }
+// }
+//
+// class ClinicImagesPath {
+//   String image;
+//
+//   ClinicImagesPath({
+//     required this.image,
+//   });
+//
+//   factory ClinicImagesPath.fromJson(Map<String, dynamic> json) =>
+//       ClinicImagesPath(
+//         image: json['image'],
+//       );
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> json = <String, dynamic>{};
+//     json['image'] = image;
+//     return json;
+//   }
+// }
 class DoctorModel {
+  dynamic page;
+  dynamic totalPages;
+  dynamic totalDoctors;
+  List<Body>? body;
+
   DoctorModel({
     this.page,
     this.totalPages,
@@ -16,27 +302,45 @@ class DoctorModel {
     this.body,
   });
 
-  final String? page;
-  final int? totalPages;
-  final int? totalDoctors;
-  final List<Body>? body;
+  DoctorModel.fromJson(Map<String, dynamic> json) {
+    page = json['page'] as dynamic;
+    totalPages = json['total_pages'] as dynamic;
+    totalDoctors = json['total_doctors'] as dynamic;
+    body = (json['body'] as List?)?.map((dynamic e) => Body.fromJson(e as Map<String,dynamic>)).toList();
+  }
 
-  factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
-    page: json["page"] == null ? null : json["page"],
-    totalPages: json["total_pages"] == null ? null : json["total_pages"],
-    totalDoctors: json["total_doctors"] == null ? null : json["total_doctors"],
-    body: json["body"] == null ? null : List<Body>.from(json["body"].map((x) => Body.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "page": page == null ? null : page,
-    "total_pages": totalPages == null ? null : totalPages,
-    "total_doctors": totalDoctors == null ? null : totalDoctors,
-    "body": body == null ? null : List<dynamic>.from(body!.map((x) => x.toJson())),
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['page'] = page;
+    json['total_pages'] = totalPages;
+    json['total_doctors'] = totalDoctors;
+    json['body'] = body?.map((e) => e.toJson()).toList();
+    return json;
+  }
 }
 
 class Body {
+  String? id;
+  List<DoctorName>? doctorName;
+  String? doctorEmail;
+  String? doctorGender;
+  List<DoctorSpecialization>? doctorSpecialization;
+  String? doctorLocation;
+  List<DoctorClinics>? doctorClinics;
+  dynamic doctorRating;
+  String? certificateImagePath;
+  String? profileImagePath;
+  List<ClinicImagesPath>? clinicImagesPath;
+  String? profileStatus;
+  String? fees;
+  List<String>? doctorPadges;
+  String? clinicWaitingTime;
+  int? voting;
+  String? entity;
+  int? v;
+  String? createdAt;
+  String? updatedAt;
+
   Body({
     this.id,
     this.doctorName,
@@ -54,279 +358,179 @@ class Body {
     this.doctorPadges,
     this.clinicWaitingTime,
     this.voting,
+    this.entity,
     this.v,
     this.createdAt,
     this.updatedAt,
   });
 
-  final String? id;
-  final List<DoctorName>? doctorName;
-  final String? doctorEmail;
-  final DoctorGender? doctorGender;
-  final List<DoctorSpecialization>? doctorSpecialization;
-  final DoctorLocation? doctorLocation;
-  final List<DoctorClinic>? doctorClinics;
-  final double? doctorRating;
-  final String? certificateImagePath;
-  final String? profileImagePath;
-  final List<ClinicImagesPath>? clinicImagesPath;
-  final ProfileStatus? profileStatus;
-  final String? fees;
-  final List<DoctorPadge>? doctorPadges;
-  final String? clinicWaitingTime;
-  final int? voting;
-  final int? v;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  Body.fromJson(Map<String, dynamic> json) {
+    id = json['_id'] as String?;
+    doctorName = (json['doctorName'] as List?)?.map((dynamic e) => DoctorName.fromJson(e as Map<String,dynamic>)).toList();
+    doctorEmail = json['doctorEmail'] as String?;
+    doctorGender = json['doctorGender'] as String?;
+    doctorSpecialization = (json['doctorSpecialization'] as List?)?.map((dynamic e) => DoctorSpecialization.fromJson(e as Map<String,dynamic>)).toList();
+    doctorLocation = json['doctorLocation'] as String?;
+    doctorClinics = (json['doctorClinics'] as List?)?.map((dynamic e) => DoctorClinics.fromJson(e as Map<String,dynamic>)).toList();
+    doctorRating = json['doctorRating'] as dynamic;
+    certificateImagePath = json['certificateImagePath'] as String?;
+    profileImagePath = json['profileImagePath'] as String?;
+    clinicImagesPath = (json['clinicImagesPath'] as List?)?.map((dynamic e) => ClinicImagesPath.fromJson(e as Map<String,dynamic>)).toList();
+    profileStatus = json['profileStatus'] as String?;
+    fees = json['fees'] as String?;
+    doctorPadges = (json['doctorPadges'] as List?)?.map((dynamic e) => e as String).toList();
+    clinicWaitingTime = json['clinicWaitingTime'] as String?;
+    voting = json['voting'] as int?;
+    entity = json['entity'] as String?;
+    v = json['__v'] as int?;
+    createdAt = json['createdAt'] as String?;
+    updatedAt = json['updatedAt'] as String?;
+  }
 
-  factory Body.fromJson(Map<String, dynamic> json) => Body(
-    id: json["_id"] == null ? null : json["_id"],
-    doctorName: json["doctorName"] == null ? null : List<DoctorName>.from(json["doctorName"].map((x) => DoctorName.fromJson(x))),
-    doctorEmail: json["doctorEmail"] == null ? null : json["doctorEmail"],
-    doctorGender: json["doctorGender"] == null ? null : doctorGenderValues.map[json["doctorGender"]],
-    doctorSpecialization: json["doctorSpecialization"] == null ? null : List<DoctorSpecialization>.from(json["doctorSpecialization"].map((x) => DoctorSpecialization.fromJson(x))),
-    doctorLocation: json["doctorLocation"] == null ? null : doctorLocationValues.map[json["doctorLocation"]],
-    doctorClinics: json["doctorClinics"] == null ? null : List<DoctorClinic>.from(json["doctorClinics"].map((x) => DoctorClinic.fromJson(x))),
-    doctorRating: json["doctorRating"] == null ? null : json["doctorRating"].toDouble(),
-    certificateImagePath: json["certificateImagePath"] == null ? null : json["certificateImagePath"],
-    profileImagePath: json["profileImagePath"] == null ? null : json["profileImagePath"],
-    clinicImagesPath: json["clinicImagesPath"] == null ? null : List<ClinicImagesPath>.from(json["clinicImagesPath"].map((x) => ClinicImagesPath.fromJson(x))),
-    profileStatus: json["profileStatus"] == null ? null : profileStatusValues.map[json["profileStatus"]],
-    fees: json["fees"] == null ? null : json["fees"],
-    doctorPadges: json["doctorPadges"] == null ? null : List<DoctorPadge>.from(json["doctorPadges"].map((x) => doctorPadgeValues.map[x])),
-    clinicWaitingTime: json["clinicWaitingTime"] == null ? null : json["clinicWaitingTime"],
-    voting: json["voting"] == null ? null : json["voting"],
-    v: json["__v"] == null ? null : json["__v"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id == null ? null : id,
-    "doctorName": doctorName == null ? null : List<dynamic>.from(doctorName!.map((x) => x.toJson())),
-    "doctorEmail": doctorEmail == null ? null : doctorEmail,
-    "doctorGender": doctorGender == null ? null : doctorGenderValues.reverse![doctorGender],
-    "doctorSpecialization": doctorSpecialization == null ? null : List<dynamic>.from(doctorSpecialization!.map((x) => x.toJson())),
-    "doctorLocation": doctorLocation == null ? null : doctorLocationValues.reverse![doctorLocation],
-    "doctorClinics": doctorClinics == null ? null : List<dynamic>.from(doctorClinics!.map((x) => x.toJson())),
-    "doctorRating": doctorRating == null ? null : doctorRating,
-    "certificateImagePath": certificateImagePath == null ? null : certificateImagePath,
-    "profileImagePath": profileImagePath == null ? null : profileImagePath,
-    "clinicImagesPath": clinicImagesPath == null ? null : List<dynamic>.from(clinicImagesPath!.map((x) => x.toJson())),
-    "profileStatus": profileStatus == null ? null : profileStatusValues.reverse![profileStatus],
-    "fees": fees == null ? null : fees,
-    "doctorPadges": doctorPadges == null ? null : List<dynamic>.from(doctorPadges!.map((x) => doctorPadgeValues.reverse![x])),
-    "clinicWaitingTime": clinicWaitingTime == null ? null : clinicWaitingTime,
-    "voting": voting == null ? null : voting,
-    "__v": v == null ? null : v,
-    "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
-    "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['_id'] = id;
+    json['doctorName'] = doctorName?.map((e) => e.toJson()).toList();
+    json['doctorEmail'] = doctorEmail;
+    json['doctorGender'] = doctorGender;
+    json['doctorSpecialization'] = doctorSpecialization?.map((e) => e.toJson()).toList();
+    json['doctorLocation'] = doctorLocation;
+    json['doctorClinics'] = doctorClinics?.map((e) => e.toJson()).toList();
+    json['doctorRating'] = doctorRating;
+    json['certificateImagePath'] = certificateImagePath;
+    json['profileImagePath'] = profileImagePath;
+    json['clinicImagesPath'] = clinicImagesPath?.map((e) => e.toJson()).toList();
+    json['profileStatus'] = profileStatus;
+    json['fees'] = fees;
+    json['doctorPadges'] = doctorPadges;
+    json['clinicWaitingTime'] = clinicWaitingTime;
+    json['voting'] = voting;
+    json['entity'] = entity;
+    json['__v'] = v;
+    json['createdAt'] = createdAt;
+    json['updatedAt'] = updatedAt;
+    return json;
+  }
 }
 
-class ClinicImagesPath {
-  ClinicImagesPath({
-    this.image,
+class DoctorName {
+  String? arabicName;
+  String? englishName;
+  DoctorName({
+    this.arabicName,
+    this.englishName
   });
 
-  final String? image;
+  DoctorName.fromJson(Map<String, dynamic> json) {
+    arabicName = json['arabicName'] as String?;
+    englishName =  json['englishName'] as String?;
+  }
 
-  factory ClinicImagesPath.fromJson(Map<String, dynamic> json) => ClinicImagesPath(
-    image: json["image"] == null ? null : json["image"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "image": image == null ? null : image,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['arabicName'] = arabicName;
+    return json;
+  }
 }
 
-class DoctorClinic {
-  DoctorClinic({
+class DoctorSpecialization {
+  String? specializationEnglish;
+
+  DoctorSpecialization({
+    this.specializationEnglish,
+  });
+
+  DoctorSpecialization.fromJson(Map<String, dynamic> json) {
+    specializationEnglish = json['specialization_english'] as String?;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['specialization_english'] = specializationEnglish;
+    return json;
+  }
+}
+
+class DoctorClinics {
+  List<ClinicAppointment>? clinicAppointment;
+  List<Place>? place;
+
+  DoctorClinics({
     this.clinicAppointment,
     this.place,
   });
 
-  final List<ClinicAppointment>? clinicAppointment;
-  final List<Place> ?place;
+  DoctorClinics.fromJson(Map<String, dynamic> json) {
+    clinicAppointment = (json['clinicAppointment'] as List?)?.map((dynamic e) => ClinicAppointment.fromJson(e as Map<String,dynamic>)).toList();
+    place = (json['place'] as List?)?.map((dynamic e) => Place.fromJson(e as Map<String,dynamic>)).toList();
+  }
 
-  factory DoctorClinic.fromJson(Map<String, dynamic> json) => DoctorClinic(
-    clinicAppointment: json["clinicAppointment"] == null ? null : List<ClinicAppointment>.from(json["clinicAppointment"].map((x) => ClinicAppointment.fromJson(x))),
-    place: json["place"] == null ? null : List<Place>.from(json["place"].map((x) => Place.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "clinicAppointment": clinicAppointment == null ? null : List<dynamic>.from(clinicAppointment!.map((x) => x.toJson())),
-    "place": place == null ? null : List<dynamic>.from(place!.map((x) => x.toJson())),
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['clinicAppointment'] = clinicAppointment?.map((e) => e.toJson()).toList();
+    json['place'] = place?.map((e) => e.toJson()).toList();
+    return json;
+  }
 }
 
 class ClinicAppointment {
+  String? time1;
+  String? day1;
+
   ClinicAppointment({
     this.time1,
     this.day1,
-    this.time2,
-    this.day2,
-    this.time3,
-    this.day3,
-    this.sectime1,
-    this.secday1,
-    this.sectime2,
-    this.secday2,
-    this.sectime3,
-    this.secday3,
   });
 
-  final String? time1;
-  final String ?day1;
-  final String? time2;
-  final String? day2;
-  final String? time3;
-  final String? day3;
-  final String? sectime1;
-  final String? secday1;
-  final String? sectime2;
-  final String? secday2;
-  final String? sectime3;
-  final String? secday3;
+  ClinicAppointment.fromJson(Map<String, dynamic> json) {
+    time1 = json['time1'] as String?;
+    day1 = json['day1'] as String?;
+  }
 
-  factory ClinicAppointment.fromJson(Map<String, dynamic> json) => ClinicAppointment(
-    time1: json["time1"] == null ? null : json["time1"],
-    day1: json["day1"] == null ? null : json["day1"],
-    time2: json["time2"] == null ? null : json["time2"],
-    day2: json["day2"] == null ? null : json["day2"],
-    time3: json["time3"] == null ? null : json["time3"],
-    day3: json["day3"] == null ? null : json["day3"],
-    sectime1: json["sectime1"] == null ? null : json["sectime1"],
-    secday1: json["secday1"] == null ? null : json["secday1"],
-    sectime2: json["sectime2"] == null ? null : json["sectime2"],
-    secday2: json["secday2"] == null ? null : json["secday2"],
-    sectime3: json["sectime3"] == null ? null : json["sectime3"],
-    secday3: json["secday3"] == null ? null : json["secday3"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "time1": time1 == null ? null : time1,
-    "day1": day1 == null ? null : day1,
-    "time2": time2 == null ? null : time2,
-    "day2": day2 == null ? null : day2,
-    "time3": time3 == null ? null : time3,
-    "day3": day3 == null ? null : day3,
-    "sectime1": sectime1 == null ? null : sectime1,
-    "secday1": secday1 == null ? null : secday1,
-    "sectime2": sectime2 == null ? null : sectime2,
-    "secday2": secday2 == null ? null : secday2,
-    "sectime3": sectime3 == null ? null : sectime3,
-    "secday3": secday3 == null ? null : secday3,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['time1'] = time1;
+    json['day1'] = day1;
+    return json;
+  }
 }
 
 class Place {
+  String? placeEnglish;
+  String? placeArabic;
+
   Place({
     this.placeEnglish,
     this.placeArabic,
-    this.clinicEnglishName,
-    this.clinicArabicName,
   });
 
-  final String? placeEnglish;
-  final String? placeArabic;
-  final String? clinicEnglishName;
-  final String? clinicArabicName;
+  Place.fromJson(Map<String, dynamic> json) {
+    placeEnglish = json['placeEnglish'] as String?;
+    placeArabic = json['placeArabic'] as String?;
+  }
 
-  factory Place.fromJson(Map<String, dynamic> json) => Place(
-    placeEnglish: json["placeEnglish"] == null ? null : json["placeEnglish"],
-    placeArabic: json["placeArabic"] == null ? null : json["placeArabic"],
-    clinicEnglishName: json["clinicEnglishName"] == null ? null : json["clinicEnglishName"],
-    clinicArabicName: json["clinicArabicName"] == null ? null : json["clinicArabicName"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "placeEnglish": placeEnglish == null ? null : placeEnglish,
-    "placeArabic": placeArabic == null ? null : placeArabic,
-    "clinicEnglishName": clinicEnglishName == null ? null : clinicEnglishName,
-    "clinicArabicName": clinicArabicName == null ? null : clinicArabicName,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['placeEnglish'] = placeEnglish;
+    json['placeArabic'] = placeArabic;
+    return json;
+  }
 }
 
-enum DoctorGender { MALE, FEMALE }
+class ClinicImagesPath {
+  String? image;
 
-final doctorGenderValues = EnumValues({
-  "female": DoctorGender.FEMALE,
-  "male": DoctorGender.MALE
-});
-
-enum DoctorLocation { BENI_SUEF }
-
-final doctorLocationValues = EnumValues({
-  "Beni Suef": DoctorLocation.BENI_SUEF
-});
-
-class DoctorName {
-  DoctorName({
-    this.arabicName,
-    this.englishName,
+  ClinicImagesPath({
+    this.image,
   });
 
-  final String? arabicName;
-  final String? englishName;
+  ClinicImagesPath.fromJson(Map<String, dynamic> json) {
+    image = json['image'] as String?;
+  }
 
-  factory DoctorName.fromJson(Map<String, dynamic> json) => DoctorName(
-    arabicName: json["arabicName"] == null ? null : json["arabicName"],
-    englishName: json["englishName"] == null ? null : json["englishName"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "arabicName": arabicName == null ? null : arabicName,
-    "englishName": englishName == null ? null : englishName,
-  };
-}
-
-enum DoctorPadge { HYGIENE, FRIENDLY, GOOD_LISTENER, INFORMATIVE }
-
-final doctorPadgeValues = EnumValues({
-  "friendly": DoctorPadge.FRIENDLY,
-  "good listener": DoctorPadge.GOOD_LISTENER,
-  "Hygiene": DoctorPadge.HYGIENE,
-  "informative": DoctorPadge.INFORMATIVE
-});
-
-class DoctorSpecialization {
-  DoctorSpecialization({
-    this.specializationEnglish,
-    this.specializationArabic,
-  });
-
-  final String? specializationEnglish;
-  final String? specializationArabic;
-
-  factory DoctorSpecialization.fromJson(Map<String, dynamic> json) => DoctorSpecialization(
-    specializationEnglish: json["specialization_english"] == null ? null : json["specialization_english"],
-    specializationArabic: json["specialization_arabic"] == null ? null : json["specialization_arabic"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "specialization_english": specializationEnglish == null ? null : specializationEnglish,
-    "specialization_arabic": specializationArabic == null ? null : specializationArabic,
-  };
-}
-
-enum ProfileStatus { ACCEPTED }
-
-final profileStatusValues = EnumValues({
-  "accepted": ProfileStatus.ACCEPTED
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String>? reverseMap;
-
-  EnumValues(this.map);
-
-
-  Map<T, String>? get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
-    return reverseMap;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['image'] = image;
+    return json;
   }
 }

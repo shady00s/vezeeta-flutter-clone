@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/controller/doctorController.dart';
-import 'package:vezeeta_clone/model/doctorModel.dart';
 import 'package:vezeeta_clone/view/reuseable_widgets/doctorCardWidget.dart';
 import 'package:vezeeta_clone/view/reuseable_widgets/textFormWidget.dart';
 
+import '../../../../model/doctorModel.dart';
 import '../../../managers/colorsManager.dart';
 import './selectCityPage.dart';
+
 ScrollController _controller = ScrollController();
 int pageNumber = 1;
+
 class DoctorsListPage extends StatefulWidget {
   const DoctorsListPage(
       {Key? key, required this.cityName, required this.specialization})
@@ -20,13 +22,6 @@ class DoctorsListPage extends StatefulWidget {
 }
 
 class _DoctorsListPageState extends State<DoctorsListPage> {
-
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -248,57 +243,55 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
 
           SizedBox(
               height: MediaQuery.of(context).size.height * 0.6,
-              child:  StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
+              child: StatefulBuilder(
+                builder: (BuildContext context,
+                    void Function(void Function()) setState) {
+                  return StreamBuilder<List<Body>>(
+                    stream: DoctorController().doctorDataResult(pageNumber),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
 
-              return  StreamBuilder<List<dynamic>>(
-
-                  stream: DoctorController().doctorDataResult(pageNumber),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-
-                      case ConnectionState.waiting:
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      case ConnectionState.active:
-                        return const Center(
-                          child: Text("activated"),
-                        );
-                      case ConnectionState.done:
-                        if (snapshot.hasData) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-
-                            _controller.addListener(() {
-                              if (_controller.position.pixels >= _controller.position.maxScrollExtent) {
-                                setState(() {
-                                  pageNumber  ++;
-                                  print(pageNumber);
-                                });
-
-                              }
-                            });
-
-                          });
-                          List<dynamic> data = snapshot.data;
-
-                          return ListView.builder(
-                              controller: _controller,
-                              itemCount: data.length,
-                              itemBuilder: (context, index) {
-                                return DoctorCardWidget(doctorData: data[index]);
-                              });
-                        } else {
+                        case ConnectionState.waiting:
                           return const Center(
-                            child: Text("there is no data"),
+                            child: CircularProgressIndicator(),
                           );
-                        }
-                    }
-                  },
-                );
-              },)
-              )
+                        case ConnectionState.active:
+                          return const Center(
+                            child: Text("activated"),
+                          );
+                        case ConnectionState.done:
+                          if (snapshot.hasData) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              _controller.addListener(() {
+                                if (_controller.position.pixels >
+                                    _controller.position.maxScrollExtent) {
+                                  setState(() {
+                                    pageNumber++;
+                                  });
+                                }
+                              });
+                            });
+                            List<Body> data = snapshot.data;
+
+                            return ListView.builder(
+                                controller: _controller,
+                                itemCount: data.length,
+                                itemBuilder: (context, index) {
+                                  return DoctorCardWidget(
+                                      doctorData: data[index]);
+                                });
+                          } else {
+                            return const Center(
+                              child: Text("there is no data"),
+                            );
+                          }
+                      }
+                    },
+                  );
+                },
+              ))
         ],
       ),
     );

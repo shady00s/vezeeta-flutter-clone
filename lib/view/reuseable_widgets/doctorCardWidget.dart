@@ -7,7 +7,7 @@ import '../reusable_screens/ratingWidget.dart';
 
 class DoctorCardWidget extends StatefulWidget {
   const DoctorCardWidget({Key? key ,required this.doctorData}) : super(key: key);
-  final  dynamic doctorData;
+  final  Body doctorData;
 
   @override
   State<DoctorCardWidget> createState() => _DoctorCardWidgetState();
@@ -21,7 +21,7 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
     return
       SizedBox(
         child: InkWell(
-          onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>DoctorProfilePage(id: widget.doctorData["_id"],) ));},
+          onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>DoctorProfilePage(id: widget.doctorData.id) ));},
           child: Column(
             children: [
               Stack(
@@ -38,7 +38,7 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                             children: [
                                CircleAvatar(
                                 radius: 40,
-                                foregroundImage: NetworkImage( widget.doctorData["profileImagePath"].toString()),
+                                foregroundImage: NetworkImage( widget.doctorData.profileImagePath!),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
@@ -47,16 +47,16 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                                   children: [
                                     RichText(text: TextSpan(text: "Doctor ",
                                         style:  const TextStyle(color: ColorManager.lightBlueTextColor),
-                                        children: [TextSpan( text:  widget.doctorData["doctorName"][1]["englishName"],style:const TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w600,fontSize: 18))])),
-                                  
+                                        children: [TextSpan( text:  widget.doctorData.doctorName![1].englishName ,style:const TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w600,fontSize: 18))])),
+
                                     SizedBox(width: MediaQuery.of(context).size.width*0.6,child: Text( '',style: const TextStyle(overflow: TextOverflow.ellipsis),),),
 
                                     //stars
 
                                     // rating widget
-                                    RatingWidget(ratingValue: widget.doctorData["doctorRating"]),
+                                    RatingWidget(ratingValue: widget.doctorData.doctorRating),
                                     const SizedBox(height: 10,),
-                                    Text("Overall Rating from  ${widget.doctorData["voting"]}  visitors"),
+                                    Text("Overall Rating from  ${widget.doctorData.voting}  visitors"),
                                     const SizedBox(height: 15,),
                                   ]
                                   ,),
@@ -78,7 +78,7 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                         child: Row(children: [
                           const  Icon(Icons.account_circle_outlined),
                           const   SizedBox(width: 6,),
-                          Text(widget.doctorData["doctorPadges"][0])
+                          Text(widget.doctorData.doctorPadges![0])
                         ],),
                       ),),
                   ),
@@ -94,26 +94,26 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                       Row(children: [
                         Image(image: AssetImage('assets/doctor/background-doc-1.png'),width: 25,),
                         const SizedBox(width: 20,),
-                        Expanded(child: Text(widget.doctorData["doctorSpecialization"][0]["specialization_english"],style: TextStyle(overflow: TextOverflow.ellipsis,color: Colors.black54 , fontWeight: FontWeight.w500),))
+                        Expanded(child: Text(widget.doctorData.doctorSpecialization![0].specializationEnglish!,style: TextStyle(overflow: TextOverflow.ellipsis,color: Colors.black54 , fontWeight: FontWeight.w500),))
 
                       ],),
                       Row(children: [
                         Image(image: AssetImage('assets/doctor/background-doc-2.png'),width: 25,),
 
                         const SizedBox(width: 20,),
-                        Expanded(child: Text(widget.doctorData["doctorLocation"],style: TextStyle(overflow: TextOverflow.ellipsis,color: Colors.black54 , fontWeight: FontWeight.w500),))
+                        Expanded(child: Text(widget.doctorData.doctorLocation!,style: TextStyle(overflow: TextOverflow.ellipsis,color: Colors.black54 , fontWeight: FontWeight.w500),))
 
                       ],),
                       Row(children: [
                         Image(image: AssetImage('assets/doctor/background-doc-3.png'),width: 25,),
                         const  SizedBox(width: 20,),
-                        Text(" ${widget.doctorData["fees"] }  EGP"   ,style: TextStyle(color: Colors.black54 , fontWeight: FontWeight.w500),)
+                        Text(" ${widget.doctorData.fees }  EGP"   ,style: TextStyle(color: Colors.black54 , fontWeight: FontWeight.w500),)
 
                       ],),
                       Row(children: [
                         Image(image: AssetImage('assets/doctor/background-doc-4.png'),width: 25,),
                         const SizedBox(width: 20,),
-                        Text("Waiting Time: ${widget.doctorData["clinicWaitingTime"]} Minuites",style: TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w500,),)
+                        Text("Waiting Time: ${widget.doctorData.clinicWaitingTime} Minuites",style: TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w500,),)
 
                       ],),
 
@@ -147,7 +147,7 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
 
 class DoctorCardMini extends StatefulWidget{
   const DoctorCardMini({Key? key,required this.doctor }) :super(key: key);
-  final Body doctor;
+  final dynamic doctor;
 
   @override
   State<DoctorCardMini> createState() => _DoctorCardMiniState();
