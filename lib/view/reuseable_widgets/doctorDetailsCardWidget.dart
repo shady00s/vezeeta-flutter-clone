@@ -9,8 +9,8 @@ import '../managers/colorsManager.dart';
 
 
 class DoctorDetailsCard extends StatefulWidget {
-  const DoctorDetailsCard({Key? key, }) : super(key: key);
-
+  const DoctorDetailsCard({Key? key, required this.doctor }) : super(key: key);
+    final Body doctor;
   @override
   State<DoctorDetailsCard> createState() => _DoctorDetailsCardState();
 }
@@ -32,29 +32,30 @@ class DoctorInfoTest {
 
 
 class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
-  List<DoctorInfoTest> testList =[
-    DoctorInfoTest(clinicLocation: "Abbasia", address: "43 abbasia street cairo", fees: "300", availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
-    ,DoctorInfoTest(clinicLocation: "Naser city", address: "43 abbasia street cairo", fees: "300", availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
-  ];
+
   List<bool>isSelectedList = [true ,false];
 
 
   @override
   Widget build(BuildContext context) {
+    List<DoctorInfoTest> testList =[
+      DoctorInfoTest(clinicLocation: widget.doctor.doctorClinics![0].place![0].placeEnglish!, address: "23 ${widget.doctor.doctorClinics![0].place![0].placeEnglish!}floor 4", fees: widget.doctor.fees!, availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
+      ,DoctorInfoTest(clinicLocation: widget.doctor.doctorClinics![1].place![1].placeEnglish!, address: "23 ${widget.doctor.doctorClinics![1].place![1].placeEnglish!}floor 24", fees: widget.doctor.fees!, availableAppointment: [AppointmentClass(hour: '4:00 PM', day: '27/3 Monday'),AppointmentClass(hour: '04:00 PM', day: '28/3 tuesday'),AppointmentClass(hour: '04:00 PM', day: '29/3 Wednesday')], waitingTime: "35 minuets")
+    ];
     List<Widget> texts = testList.map((e) =>  Padding(
-      padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width /8 ,vertical: 5),
+      padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width /12 ,vertical: 2),
       child: Text(e.clinicLocation),
     )).toList();
     return DecoratedBox(
 
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Column(
 
         children: [
          //clinic locations
 
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
             child: SizedBox(
               height: 40,
 

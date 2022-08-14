@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 
 import '../model/doctorModel.dart';
@@ -13,41 +15,28 @@ class DoctorController {
       print(data.statusMessage);
       print(data.statusCode);
       DoctorModel doctorList = DoctorModel.fromJson(data.data);
-
       for (var element in doctorList.body!) {  result.add(element);}
-
-
-
       yield result;
     }catch(e){print(e);}
 
   }
 
-  Stream<dynamic> getDoctorData( String doctorID) async*{
-    dynamic result;
-    await DioController().getDoctorById("/user-doctor-profile/", doctorID).then((value) {
-      print(value.data);
-      result =  value.data ;
-    });
+  Stream <Body> getDoctorData( String doctorID) async*{
+    print("opining doctor profile stream");
+    try{
+    late  Body result ;
+      Response<dynamic>  data =  await DioController().getDoctorById( doctorID);
+      print(data.statusMessage);
+      print(data.statusCode);
+      Body doctorList = Body.fromJson(data.data["body"]);
+    result = doctorList;
+      yield result;
+    }catch(e){
+      print(e);
+    }
 
-    print(result);
-    yield result;
   }
 }
-
-
-//   Stream<List<Body>>  doctorWithModel () async*{
-//     print("opining stream with model");
-//     List<Body> result = [];
-//     await DioController().getDoctors("/user-doctor-search").then((value) {
-//       value.data["body"].forEach((e)=> result.add(e));
-//
-//     });
-//     print(result);
-//     yield result;
-//   }
-// }
-
 class DioController{
 
   Dio dio = Dio(BaseOptions(
@@ -61,9 +50,9 @@ class DioController{
     return  await  dio.get(url, queryParameters: {"page":page});
   }
 
-  Future<Response>getDoctorById(String url,String doctorID) async{
-    print("opining dio");
+  Future<Response>getDoctorById(String doctorID) async{
+    print("opining doctor profile dio");
 
-    return  await  dio.get(url + '/user-doctor-profile/'+ doctorID, );
+    return  await  dio.get('/user-doctor-profile/$doctorID', );
   }
 }

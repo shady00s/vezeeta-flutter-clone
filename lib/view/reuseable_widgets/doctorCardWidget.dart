@@ -145,16 +145,11 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
 }
 
 
-class DoctorCardMini extends StatefulWidget{
+class DoctorCardMini extends StatelessWidget{
   const DoctorCardMini({Key? key,required this.doctor }) :super(key: key);
-  final dynamic doctor;
+  final Body doctor;
 
-  @override
-  State<DoctorCardMini> createState() => _DoctorCardMiniState();
-}
 
-class _DoctorCardMiniState extends State<DoctorCardMini> {
-  @override
   Widget build(BuildContext context){
     return Column(
       children: [
@@ -171,7 +166,7 @@ class _DoctorCardMiniState extends State<DoctorCardMini> {
                     children: [
                       CircleAvatar(
                         radius: 40,
-                        foregroundImage: AssetImage("assets/background2.png"),
+                        foregroundImage: NetworkImage(doctor.profileImagePath!),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -179,22 +174,15 @@ class _DoctorCardMiniState extends State<DoctorCardMini> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RichText(text: TextSpan(text: "Doctor ",
-                                style: TextStyle(color: ColorManager.lightBlueTextColor),
-                                children: [TextSpan(text:'',style: TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w600,fontSize: 18))])),
-                            SizedBox(height: 20,),
-                            SizedBox(child: Text("Dermatology,Cosmetology and laser asdad",style: TextStyle(overflow: TextOverflow.ellipsis),),width: MediaQuery.of(context).size.width*0.6,)
-                            ,SizedBox(height: 10,),
+                                style: const TextStyle(color: ColorManager.lightBlueTextColor),
+                                children: [TextSpan(text:doctor.doctorName![1].englishName,style: const TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w600,fontSize: 18))])),
+                            const SizedBox(height: 20,),
+                            SizedBox(width: MediaQuery.of(context).size.width*0.6,child: Text(doctor.doctorSpecialization![0].specializationEnglish!,style: const TextStyle(overflow: TextOverflow.ellipsis),),)
+                            ,const SizedBox(height: 10,),
                             //stars
-                            Row(
-                              children: [
-                                Icon(Icons.star ,color: Colors.amber,size: 20,),
-                                Icon(Icons.star,color: Colors.amber,size: 20,),
-                                Icon(Icons.star,color: Colors.amber,size: 20,),
-                                Icon(Icons.star,color: Colors.amber,size: 20,),
-                                Icon(Icons.star,color: Colors.amber,size: 20,),
-                              ],),
-                            SizedBox(height: 10,),
-                            Text("Overall Rating from 167 visitors"),
+                            RatingWidget(ratingValue: doctor.doctorRating),
+                            const SizedBox(height: 10,),
+                            Text("Overall Rating from ${doctor.voting }  visitors"),
                             SizedBox(height: 15,),
                           ]
                           ,),
@@ -216,8 +204,7 @@ class _DoctorCardMiniState extends State<DoctorCardMini> {
                   child: Row(children: [
                     Icon(Icons.account_circle_outlined),
                     SizedBox(width: 6,),
-                    Text("Good listener"),
-
+                    Text(doctor.doctorPadges![0]),
                   ],),
                 ),),
             ),

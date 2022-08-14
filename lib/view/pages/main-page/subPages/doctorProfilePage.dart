@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/controller/doctorController.dart';
 
+import '../../../../model/doctorModel.dart';
 import '../../../reuseable_widgets/doctorCardWidget.dart';
 import '../../../reuseable_widgets/doctorDetailsCardWidget.dart';
 
@@ -23,43 +24,42 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
             IconButton(onPressed: () {}, icon: Icon(Icons.heart_broken)),
           ],
         ),
-        body: Center(
-          child: StreamBuilder(
-              stream: DoctorController().getDoctorData(widget.id!),
-              builder: (context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
+        body: StreamBuilder <Body>(
+            stream: DoctorController().getDoctorData(widget.id!),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
 
-                  case ConnectionState.waiting:
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                  case ConnectionState.active:
+                case ConnectionState.waiting:
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+                case ConnectionState.active:
 
-                  case ConnectionState.done:
-                    if (snapshot.hasData) {
-                      dynamic dr = snapshot.data;
-                      print(dr);
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            DoctorCardMini(
-                              doctor: dr,
-                            ),
-                            const SizedBox(height: 10),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: const DoctorDetailsCard()),
-                          ],
-                        ),
-                      );
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                }
-              }),
-        ));
+                case ConnectionState.done:
+                  if (snapshot.hasData) {
+                  Body dr = snapshot.data!;
+
+                    print(dr);
+                   return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          DoctorCardMini(
+                            doctor: dr,
+                          ),
+                          const SizedBox(height: 10),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child:  DoctorDetailsCard( doctor: dr,)),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+              }
+            }));
   }
 }
