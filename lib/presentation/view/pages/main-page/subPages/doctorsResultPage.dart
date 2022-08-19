@@ -22,6 +22,7 @@ class DoctorsListPage extends StatefulWidget {
   final String cityName;
 
 
+
   @override
   State<DoctorsListPage> createState() => _DoctorsListPageState();
 }
