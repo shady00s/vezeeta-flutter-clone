@@ -1,35 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:vezeeta_clone/controller/doctorController.dart';
-import 'package:vezeeta_clone/view/reuseable_widgets/doctorCardWidget.dart';
-import 'package:vezeeta_clone/view/reuseable_widgets/textFormWidget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../model/doctorModel.dart';
+
+
+import '../../../../../data/controller/doctorController.dart';
+import '../../../../../data/model/doctorModel.dart';
 import '../../../managers/colorsManager.dart';
-import './selectCityPage.dart';
+import '../../../reuseable_widgets/doctorCardWidget.dart';
+import '../../../reuseable_widgets/textFormWidget.dart';
+import 'selectCityPage.dart';
 
 ScrollController _controller = ScrollController();
 int pageNumber = 1;
 
+
+
 class DoctorsListPage extends StatefulWidget {
   const DoctorsListPage(
-      {Key? key, required this.cityName, required this.specialization})
+      {Key? key, required this.cityName})
       : super(key: key);
   final String cityName;
-  final String specialization;
+
 
   @override
   State<DoctorsListPage> createState() => _DoctorsListPageState();
 }
 
 class _DoctorsListPageState extends State<DoctorsListPage> {
+
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Column(
         children: [
           // customized app bar
           DecoratedBox(
-            decoration: BoxDecoration(color: ColorManager.appBarColor),
+            decoration: const BoxDecoration(color: ColorManager.appBarColor),
             child: SizedBox(
               height: 85,
               child: Padding(
@@ -39,13 +48,13 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       ),
                       onPressed: () => Navigator.pop(context),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     InkWell(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -55,14 +64,14 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
                             "Searching in",
                             style: TextStyle(fontSize: 11, color: Colors.white),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           SizedBox(
                             child: Card(
                               margin: EdgeInsets.zero,
                               elevation: 0,
-                              color: Color.fromRGBO(
+                              color: const Color.fromRGBO(
                                   3, 94, 179, 0.7137254901960784),
                               child: Padding(
                                 padding:
@@ -72,10 +81,10 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
                                   children: [
                                     Text(
                                       widget.cityName,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 12, color: Colors.white),
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.keyboard_arrow_down_rounded,
                                       color: Colors.white,
                                     )
@@ -156,12 +165,12 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
 
                 Card(
                   margin:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      const EdgeInsets.symmetric(horizontal: 12,vertical: 4),
                   elevation: 0,
                   color: ColorManager.lightBlueBackgroundColor,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 18.0, horizontal: 8),
+                        vertical:20.0, horizontal: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -217,37 +226,24 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
             ),
           ),
 
-          // StreamBuilder<List<Body>>(
-          //     stream:DoctorController().doctorWithModel() ,
-          //     builder: (context,snapshot){
-          //         switch (snapshot.connectionState){
-          //
-          //           case ConnectionState.none:
-          //
-          //           case ConnectionState.waiting:
-          //             return const Center(child: CircularProgressIndicator(),);
-          //           case ConnectionState.active:
-          //           case ConnectionState.done:
-          //           if(snapshot.hasData){
-          //             List<Body> x = snapshot.data!;
-          //
-          //             print(x.map((e) => print(e)));
-          //           return Text(x[0].doctorName![0].englishName!);
-          //           }else{
-          //             return Text("No connection");
-          //           }
-          //         }
-          //
-          // }),
-          //
 
-          SizedBox(
-              height: MediaQuery.of(context).size.height * 0.6,
+
+          Expanded(
+
               child: StatefulBuilder(
                 builder: (BuildContext context,
                     void Function(void Function()) setState) {
+
+                  getSharedPerefernces() async{
+                    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                    String  val = prefs.getString("doctorSpecialization") ?? "";
+                    return val;
+                  }
+
+
                   return StreamBuilder<List<Body>>(
-                    stream: DoctorController().doctorDataResult(pageNumber),
+                    stream: DoctorController().doctorDataResult(pageNumber ,  getSharedPerefernces() ,widget.cityName),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       switch (snapshot.connectionState) {
@@ -258,9 +254,7 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
                             child: CircularProgressIndicator(),
                           );
                         case ConnectionState.active:
-                          return const Center(
-                            child: Text("activated"),
-                          );
+
                         case ConnectionState.done:
                           if (snapshot.hasData) {
                             WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -276,6 +270,7 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
                             List<Body> data = snapshot.data;
 
                             return ListView.builder(
+                              physics: const BouncingScrollPhysics(),
                                 controller: _controller,
                                 itemCount: data.length,
                                 itemBuilder: (context, index) {

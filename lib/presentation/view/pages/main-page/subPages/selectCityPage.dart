@@ -65,7 +65,7 @@ class SelectCityPage extends StatelessWidget {
                child:
                InkWell(
                  onTap: (){
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=> DoctorsListPage(cityName:_citiesList[index].cityName, specialization: specialization!,)
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=> DoctorsListPage(cityName:_citiesList[index].cityName,)
                    ));
                  },
                  child:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vezeeta_clone/view/pages/main-page/subPages/doctorCategoriesPage.dart';
+import 'package:vezeeta_clone/presentation/view/pages/main-page/subPages/doctorCategoriesPage.dart';
 
 import '../../managers/colorsManager.dart';
 import '../../managers/textStyleManager.dart';

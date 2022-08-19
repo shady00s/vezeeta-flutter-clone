@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vezeeta_clone/view/pages/main-page/homePage.dart';
-import 'package:vezeeta_clone/view/pages/main-page/profile-page.dart';
+import 'package:vezeeta_clone/presentation/view/pages/main-page/profile-page.dart';
+
 import '../../managers/colorsManager.dart';
 import 'activities-page.dart';
+import 'homePage.dart';
 int selectedIndex =0;
 
 class MainPage extends StatefulWidget {

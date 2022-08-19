@@ -476,15 +476,46 @@ class DoctorClinics {
 class ClinicAppointment {
   String? time1;
   String? day1;
+  String? time2;
+  String? day2;
+  String? time3;
+  String? day3;
+  String? sectime1;
+  String? secday1;
+  String? sectime2;
+  String? secday2;
+  String? sectime3;
+  String? secday3;
+
 
   ClinicAppointment({
     this.time1,
     this.day1,
+    this.time2,
+    this.day2,
+    this.time3,
+    this.day3,
+    this. secday1,
+    this.secday2,
+    this.secday3,
+    this.sectime1,
+    this.sectime2,
+    this.sectime3,
   });
 
   ClinicAppointment.fromJson(Map<String, dynamic> json) {
     time1 = json['time1'] as String?;
     day1 = json['day1'] as String?;
+    time2 = json['time2'] as String?;
+    day2 = json['day2'] as String?;
+    time3 = json['time3'] as String?;
+    day3 = json['day3'] as String?;
+    secday1 =  json['secday1'] as String?;
+    secday2 =  json['secday2'] as String?;
+    secday3 =  json['secday3'] as String?;
+    sectime1 =  json['sectime1'] as String?;
+    sectime2 =  json['sectime2'] as String?;
+    sectime3 =  json['sectime3'] as String?;
   }
 
   Map<String, dynamic> toJson() {

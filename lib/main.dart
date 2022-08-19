@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:vezeeta_clone/view/managers/colorsManager.dart';
-import 'package:vezeeta_clone/view/pages/main-page/main-page.dart';
-import 'package:vezeeta_clone/view/reusable_screens/introSplashScreen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vezeeta_clone/businuss-logic/cubit/cubit.dart';
+import 'package:vezeeta_clone/businuss-logic/cubit/cubit_state.dart';
+import 'package:vezeeta_clone/presentation/view/managers/colorsManager.dart';
+import 'package:vezeeta_clone/presentation/view/pages/main-page/main-page.dart';
+import 'package:vezeeta_clone/presentation/view/reusable_screens/introSplashScreen.dart';
+import 'package:vezeeta_clone/presentation/view/reusable_screens/noConnectivityScreen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -37,16 +42,39 @@ class Routing extends StatefulWidget {
 }
 
 class _RoutingState extends State<Routing> {
+
   @override
+  void initState() {
+    demoIntroSplashScreen();
+
+    super.initState();
+  }
+  @override
+
   bool isLoading = true;
   demoIntroSplashScreen(){
-    Future.delayed(const Duration(seconds: 3) ).then((value) => setState((){
+    Future.delayed(const Duration(seconds: 5  ) ).then((value) => setState((){
       isLoading = false;
     }));
   }
   Widget build(BuildContext context) {
-    demoIntroSplashScreen();
+
    
-    return   isLoading?  const IntroSplashScreen():   MainPage();
+    return isLoading  ?   IntroSplashScreen(): MainPage();
+      
+
+    //   BlocProvider<CubitFunction>(create: (context)=> CubitFunction().networkHandeler(),child:   isLoading?  const IntroSplashScreen():   BlocBuilder<CubitFunction,CubitState>(
+    //
+    //     builder: (context,state){
+    //       if(CubitFunction().networkHandeler() == true){
+    //         return   MainPage();
+    //       }else {
+    //         return const NoConnectivityScreen();
+    //       }
+    //
+    //     }
+    // ) );
+
+
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vezeeta_clone/model/doctorModel.dart';
 
+import '../../../data/model/doctorModel.dart';
 import '../managers/colorsManager.dart';
 import '../pages/main-page/subPages/doctorProfilePage.dart';
 import '../reusable_screens/ratingWidget.dart';
@@ -28,10 +28,11 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                 fit: StackFit.loose,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       DecoratedBox(decoration:const BoxDecoration(color: Color.fromRGBO(240, 240, 240, 1)),
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 10.0,bottom: 20.0,left: 40.0),
+                          padding: const EdgeInsets.only(top: 10.0,bottom: 35.0,left: 20,right: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,7 +42,7 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                                 foregroundImage: NetworkImage( widget.doctorData.profileImagePath!),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -121,8 +122,8 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                       const SizedBox(height: 10,),
                       Row(children: [
 
-                        Expanded(child:DecoratedBox(decoration:const BoxDecoration(color: Color.fromRGBO(235, 235, 235, 1)), child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Expanded(child: DecoratedBox(decoration:BoxDecoration(color: Color.fromRGBO(235, 235, 235, 1)), child: Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text("Available Today 0:400 PM",textAlign: TextAlign.center,),
                         ),)
                         ),
@@ -150,6 +151,7 @@ class DoctorCardMini extends StatelessWidget{
   final Body doctor;
 
 
+  @override
   Widget build(BuildContext context){
     return Column(
       children: [

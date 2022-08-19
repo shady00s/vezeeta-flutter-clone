@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vezeeta_clone/controller/doctorController.dart';
 
-import '../../../../model/doctorModel.dart';
+import '../../../../../data/controller/doctorController.dart';
+import '../../../../../data/model/doctorModel.dart';
 import '../../../reuseable_widgets/doctorCardWidget.dart';
 import '../../../reuseable_widgets/doctorDetailsCardWidget.dart';
 
@@ -48,6 +48,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                             doctor: dr,
                           ),
                           const SizedBox(height: 10),
+
                           SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child:  DoctorDetailsCard( doctor: dr,)),
