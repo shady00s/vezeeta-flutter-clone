@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../managers/colorsManager.dart';
+import 'doctorCategoriesPage.dart';
 import 'doctorsResultPage.dart';
 
 class _Cities{
@@ -47,7 +48,9 @@ class SelectCityPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorManager.appBarColor,
-        title: Text("Select page"),
+        leading: IconButton(icon:const Icon(Icons.arrow_back),onPressed: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const DoctorCategoriesPage())),),
+
+        title: const Text("Select page"),
       ),
       body: ListView.builder(
           itemCount: _citiesList.length,

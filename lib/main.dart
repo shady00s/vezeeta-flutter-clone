@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-
+        backgroundColor: ColorManager.scaffoldBackGroundColor,
         scaffoldBackgroundColor: ColorManager.scaffoldBackGroundColor,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
             backgroundColor: ColorManager.appBarColor,
           elevation: 0
         ),

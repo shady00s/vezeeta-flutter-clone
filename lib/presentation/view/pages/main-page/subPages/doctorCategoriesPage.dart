@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vezeeta_clone/presentation/view/pages/main-page/homePage.dart';
+import 'package:vezeeta_clone/presentation/view/pages/main-page/main-page.dart';
 
 import '../../../managers/colorsManager.dart';
 import '../../../managers/textStyleManager.dart';
@@ -49,6 +51,7 @@ class DoctorCategoriesPage extends StatelessWidget {
         backgroundColor: ColorManager.appBarColor,
         elevation: 0,
         title: Text("Search for doctor"),
+        leading: IconButton(icon:const Icon(Icons.arrow_back),onPressed: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MainPage())),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
