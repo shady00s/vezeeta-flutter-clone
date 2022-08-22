@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vezeeta_clone/presentation/view/reusable_screens/SearchByNameScreen.dart';
+import 'package:vezeeta_clone/presentation/view/reusable_screens/filterScreen.dart';
 
 
 
@@ -18,9 +19,9 @@ int pageNumber = 1;
 
 class DoctorsListPage extends StatefulWidget {
   const DoctorsListPage(
-      {Key? key, required this.cityName})
+      {Key? key,  this.cityName})
       : super(key: key);
-  final String cityName;
+  final String? cityName;
 
 
 
@@ -82,7 +83,7 @@ bool fromLowestToHighest = false;
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      widget.cityName,
+                                      widget.cityName!,
                                       style: const TextStyle(
                                           fontSize: 12, color: Colors.white),
                                     ),
@@ -142,32 +143,7 @@ bool fromLowestToHighest = false;
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(children: [
-                    Expanded(
-                        child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(elevation: 0),
-                      onPressed: () {
-                        showModalBottomSheet(context: context, builder: (context){
-                          return Card(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('Sort doctors by:',style: TextStyling.titleStyleText,),
 
-                                TextButton(onPressed: (){
-
-
-                                }, child: Text("From highest to lowest")),
-                                TextButton(onPressed: (){}, child: Text("From  lowest to highest "))
-                              ],
-                            ),
-                          );
-                        });
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [Icon(Icons.sort), Text("Sort")],
-                      ),
-                    )),
                     const SizedBox(
                       width: 10,
                     ),
@@ -176,7 +152,7 @@ bool fromLowestToHighest = false;
                             style: OutlinedButton.styleFrom(
                               elevation: 0,
                             ),
-                            onPressed: () {},
+                            onPressed: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>FilterScreen()));},
                             child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -284,7 +260,7 @@ bool fromLowestToHighest = false;
 
 
                   return StreamBuilder<List<Body>>(
-                    stream: DoctorController().doctorDataResult(pageNumber ,  getSharedPerefernces() ,widget.cityName),
+                    stream: DoctorController().doctorDataResult(pageNumber ,  getSharedPerefernces() ,widget.cityName!),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       switch (snapshot.connectionState) {

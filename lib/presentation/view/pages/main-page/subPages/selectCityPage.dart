@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../managers/colorsManager.dart';
 import 'doctorCategoriesPage.dart';
@@ -68,8 +69,12 @@ class SelectCityPage extends StatelessWidget {
                child:
                InkWell(
                  onTap: (){
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=> DoctorsListPage(cityName:_citiesList[index].cityName,)
-                   ));
+                   SharedPreferences.getInstance().then((value) {
+                     value.setString('city', _citiesList[index].cityName);
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=> DoctorsListPage(cityName:_citiesList[index].cityName,)));
+
+                   });
+
                  },
                  child:
                      Padding(
