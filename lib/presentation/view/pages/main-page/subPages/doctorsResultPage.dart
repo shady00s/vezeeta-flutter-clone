@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vezeeta_clone/presentation/view/reusable_screens/SearchByNameScreen.dart';
 
 
 
 import '../../../../../data/controller/doctorController.dart';
 import '../../../../../data/model/doctorModel.dart';
 import '../../../managers/colorsManager.dart';
+import '../../../managers/textStyleManager.dart';
 import '../../../reuseable_widgets/doctorCardWidget.dart';
-import '../../../reuseable_widgets/textFormWidget.dart';
 import 'selectCityPage.dart';
 
 ScrollController _controller = ScrollController();
@@ -29,7 +30,7 @@ class DoctorsListPage extends StatefulWidget {
 
 class _DoctorsListPageState extends State<DoctorsListPage> {
 
-
+bool fromLowestToHighest = false;
 
   @override
   Widget build(BuildContext context) {
@@ -114,15 +115,54 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 // search
-                TextFormWidget(hintText: 'Search for doctor', prefixIcon: Icons.search, controller: TextEditingController(), inputType: TextInputType.text,),
-                //filter buttons
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey, width: 1)),
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchByNameScreen()));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              Icon(Icons.search),
+                              Text(
+                                "search for,doctor",
+                                style: TextStyling.subTitleStyleText,
+                              )
+                            ],
+                          ),
+                        ),
+                      )),
+                )  ,              //filter buttons
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(children: [
                     Expanded(
                         child: OutlinedButton(
                       style: OutlinedButton.styleFrom(elevation: 0),
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(context: context, builder: (context){
+                          return Card(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Sort doctors by:',style: TextStyling.titleStyleText,),
+
+                                TextButton(onPressed: (){
+
+
+                                }, child: Text("From highest to lowest")),
+                                TextButton(onPressed: (){}, child: Text("From  lowest to highest "))
+                              ],
+                            ),
+                          );
+                        });
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [Icon(Icons.sort), Text("Sort")],

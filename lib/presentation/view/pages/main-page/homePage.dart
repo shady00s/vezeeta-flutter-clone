@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/presentation/view/pages/main-page/subPages/doctorCategoriesPage.dart';
+import 'package:vezeeta_clone/presentation/view/reusable_screens/SearchByNameScreen.dart';
 
 import '../../managers/colorsManager.dart';
 import '../../managers/textStyleManager.dart';
@@ -166,36 +167,41 @@ class _HomePageState extends State<HomePage> {
               // book clinic appointment widget ( leads to search page )
               Card(
                 elevation: 0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        "Book clinic appointment",
-                        style: TextStyling.titleStyleText,
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchByNameScreen()));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          "Book clinic appointment",
+                          style: TextStyling.titleStyleText,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: DecoratedBox(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.grey, width: 1)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                Icon(Icons.search),
-                                Text(
-                                  "search for speciality,doctor,or hospital",
-                                  style: TextStyling.subTitleStyleText,
-                                )
-                              ],
-                            ),
-                          )),
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: Colors.grey, width: 1)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.search),
+                                  Text(
+                                    "search for speciality,doctor,or hospital",
+                                    style: TextStyling.subTitleStyleText,
+                                  )
+                                ],
+                              ),
+                            )),
+                      )
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20,),

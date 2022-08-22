@@ -36,8 +36,6 @@ class UserController {
     }
   }
 
-
-
 Stream<dynamic>showUserAppointments() async* {
 
     Response data = await DioController().getUserData();
@@ -60,6 +58,13 @@ Stream<dynamic>showUserAppointments() async* {
       yield {'userData':result, "doctorData":doctors};
 
 
+  }
+
+  Future <List <Body>> searchByName(String doctorName) async{
+    Response data =await   DioController().searchByName(doctorName);
+       DoctorModel  result = DoctorModel.fromJson(data.data) ;
+      print(result);
+       return  result.body!;
   }
 
 }

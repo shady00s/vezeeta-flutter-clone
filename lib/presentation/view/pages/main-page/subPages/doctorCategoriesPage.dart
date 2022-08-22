@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vezeeta_clone/presentation/view/pages/main-page/homePage.dart';
 import 'package:vezeeta_clone/presentation/view/pages/main-page/main-page.dart';
 
 import '../../../managers/colorsManager.dart';
 import '../../../managers/textStyleManager.dart';
-import '../../../reuseable_widgets/textFormWidget.dart';
+import '../../../reusable_screens/SearchByNameScreen.dart';
 import 'selectCityPage.dart';
 
 List<String> _categories = [
@@ -58,7 +57,31 @@ class DoctorCategoriesPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFormWidget(hintText: 'Search for doctor', prefixIcon: Icons.search, controller: TextEditingController(), inputType: TextInputType.text,),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: DecoratedBox(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey, width: 1)),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchByNameScreen()));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Icon(Icons.search),
+                          Text(
+                            "search for,doctor",
+                            style: TextStyling.subTitleStyleText,
+                          )
+                        ],
+                      ),
+                    ),
+                  )),
+            )  ,
+            const SizedBox(height: 10,),
             Expanded(
                 child: SingleChildScrollView(
               child: Column(
