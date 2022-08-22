@@ -86,7 +86,7 @@ class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
                 hour: widget
                     .doctor.doctorClinics![1].clinicAppointment![2].sectime3!,
                 day:
-                widget.doctor.doctorClinics![1].clinicAppointment![2].sectime3!)
+                widget.doctor.doctorClinics![1].clinicAppointment![2].secday3!)
           ],
           waitingTime: "35 minuets")
     ];
@@ -240,13 +240,15 @@ class _DoctorDetailsCardState extends State<DoctorDetailsCard> {
           // appointment widget
            Padding(
            padding: const EdgeInsets.only(top: 14.0, bottom: 8.0),
-            child: AppointmentCardWidget(appointmentList:testList)),
+            child: AppointmentCardWidget(   doctorData:widget.doctor ,doctorInfoTest:testList[clinicIndex])),
 
           const Text(
             "Time slot reservation",
             style: TextStyling.subTitleStyleText,
           ),
-          const Divider()
+          const Divider(),
+          
+
         ],
       ),
     );

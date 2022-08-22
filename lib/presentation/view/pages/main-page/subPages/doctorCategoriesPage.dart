@@ -58,7 +58,7 @@ class DoctorCategoriesPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFormWidget(),
+            TextFormWidget(hintText: 'Search for doctor', prefixIcon: Icons.search, controller: TextEditingController(), inputType: TextInputType.text,),
             Expanded(
                 child: SingleChildScrollView(
               child: Column(

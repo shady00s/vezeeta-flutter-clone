@@ -48,7 +48,7 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                                   children: [
                                     RichText(text: TextSpan(text: "Doctor ",
                                         style:  const TextStyle(color: ColorManager.lightBlueTextColor),
-                                        children: [TextSpan( text:  widget.doctorData.doctorName![1].englishName ,style:const TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w600,fontSize: 18))])),
+                                        children: [TextSpan( text:  widget.doctorData.doctorName!.englishName ,style:const TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w600,fontSize: 18))])),
 
                                     SizedBox(width: MediaQuery.of(context).size.width*0.6,child: Text( '',style: const TextStyle(overflow: TextOverflow.ellipsis),),),
 
@@ -95,7 +95,7 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
                       Row(children: [
                         Image(image: AssetImage('assets/doctor/background-doc-1.png'),width: 25,),
                         const SizedBox(width: 20,),
-                        Expanded(child: Text(widget.doctorData.doctorSpecialization![0].specializationEnglish!,style: TextStyle(overflow: TextOverflow.ellipsis,color: Colors.black54 , fontWeight: FontWeight.w500),))
+                        Expanded(child: Text(widget.doctorData.doctorSpecialization!.specializationEnglish!,style: TextStyle(overflow: TextOverflow.ellipsis,color: Colors.black54 , fontWeight: FontWeight.w500),))
 
                       ],),
                       Row(children: [
@@ -177,9 +177,9 @@ class DoctorCardMini extends StatelessWidget{
                           children: [
                             RichText(text: TextSpan(text: "Doctor ",
                                 style: const TextStyle(color: ColorManager.lightBlueTextColor),
-                                children: [TextSpan(text:doctor.doctorName![1].englishName,style: const TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w600,fontSize: 18))])),
+                                children: [TextSpan(text:doctor.doctorName!.englishName,style: const TextStyle(color: ColorManager.lightBlueTextColor,fontWeight: FontWeight.w600,fontSize: 18))])),
                             const SizedBox(height: 20,),
-                            SizedBox(width: MediaQuery.of(context).size.width*0.6,child: Text(doctor.doctorSpecialization![0].specializationEnglish!,style: const TextStyle(overflow: TextOverflow.ellipsis),),)
+                            SizedBox(width: MediaQuery.of(context).size.width*0.6,child: Text(doctor.doctorSpecialization!.specializationEnglish!,style: const TextStyle(overflow: TextOverflow.ellipsis),),)
                             ,const SizedBox(height: 10,),
                             //stars
                             RatingWidget(ratingValue: doctor.doctorRating),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vezeeta_clone/presentation/view/managers/textStyleManager.dart';
 
 import '../../../../../data/controller/doctorController.dart';
 import '../../../../../data/model/doctorModel.dart';
@@ -52,6 +53,31 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                           SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child:  DoctorDetailsCard( doctor: dr,)),
+
+                          // clinic images
+                          SizedBox(child: DecoratedBox(decoration: BoxDecoration(color: Colors.white),child:
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment:CrossAxisAlignment.start ,
+                              children: [
+                                const Text("Clinic Image",style: TextStyling.titleStyleText,),
+                                const SizedBox(height: 10,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+
+                                    Image(image: NetworkImage(dr.clinicImagesPath![0].image!), width: 80, height: 80,fit: BoxFit.cover,),
+                                    Image(image: NetworkImage(dr.clinicImagesPath![1].image!),width: 80, height: 80,fit: BoxFit.cover,),
+                                    Image(image: NetworkImage(dr.clinicImagesPath![2].image!),width: 80, height: 80,fit: BoxFit.cover,),
+                                  ],),
+                              ],
+                            ),
+                          )
+
+                            ,),)
+
                         ],
                       ),
                     );

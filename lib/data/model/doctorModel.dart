@@ -321,10 +321,10 @@ class DoctorModel {
 
 class Body {
   String? id;
-  List<DoctorName>? doctorName;
+DoctorName? doctorName;
   String? doctorEmail;
   String? doctorGender;
-  List<DoctorSpecialization>? doctorSpecialization;
+  DoctorSpecialization? doctorSpecialization;
   String? doctorLocation;
   List<DoctorClinics>? doctorClinics;
   dynamic doctorRating;
@@ -366,10 +366,10 @@ class Body {
 
   Body.fromJson(Map<String, dynamic> json) {
     id = json['_id'] as String?;
-    doctorName = (json['doctorName'] as List?)?.map((dynamic e) => DoctorName.fromJson(e as Map<String,dynamic>)).toList();
+    doctorName =  DoctorName.fromJson(json['doctorName']);
     doctorEmail = json['doctorEmail'] as String?;
     doctorGender = json['doctorGender'] as String?;
-    doctorSpecialization = (json['doctorSpecialization'] as List?)?.map((dynamic e) => DoctorSpecialization.fromJson(e as Map<String,dynamic>)).toList();
+    doctorSpecialization = DoctorSpecialization.fromJson( json['doctorSpecialization']);
     doctorLocation = json['doctorLocation'] as String?;
     doctorClinics = (json['doctorClinics'] as List?)?.map((dynamic e) => DoctorClinics.fromJson(e as Map<String,dynamic>)).toList();
     doctorRating = json['doctorRating'] as dynamic;
@@ -390,10 +390,10 @@ class Body {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> json = <String, dynamic>{};
     json['_id'] = id;
-    json['doctorName'] = doctorName?.map((e) => e.toJson()).toList();
+    json['doctorName'] = doctorName;
     json['doctorEmail'] = doctorEmail;
     json['doctorGender'] = doctorGender;
-    json['doctorSpecialization'] = doctorSpecialization?.map((e) => e.toJson()).toList();
+    json['doctorSpecialization'] = doctorSpecialization;
     json['doctorLocation'] = doctorLocation;
     json['doctorClinics'] = doctorClinics?.map((e) => e.toJson()).toList();
     json['doctorRating'] = doctorRating;

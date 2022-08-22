@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../model/doctorModel.dart';
+import 'dioController.dart';
 
 class DoctorController {
   Stream<List<Body>> doctorDataResult(int page , Future<String> doctorSpecializationEnglish,String doctorLocation) async* {
@@ -39,23 +40,4 @@ class DoctorController {
   }
 }
 
-String herokuURL = 'https://vezeeta-data-api.herokuapp.com';
 
-class DioController {
-  Dio dio =
-      Dio(BaseOptions(baseUrl: herokuURL, receiveDataWhenStatusError: true));
-
-  Future<Response> getDoctors(String url, int page ,String doctorSpecializationEnglish,doctorLocation) async {
-    print("opining dio");
-
-    return await dio.get(url, queryParameters: {"page": page , "doctorSpecializationEnglish" :doctorSpecializationEnglish ,"doctorLocation":doctorLocation});
-  }
-
-  Future<Response> getDoctorById(String doctorID) async {
-    print("opining doctor profile dio");
-
-    return await dio.get(
-      '/user-doctor-profile/$doctorID',
-    );
-  }
-}

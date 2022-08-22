@@ -114,7 +114,7 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 // search
-                TextFormWidget(),
+                TextFormWidget(hintText: 'Search for doctor', prefixIcon: Icons.search, controller: TextEditingController(), inputType: TextInputType.text,),
                 //filter buttons
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
