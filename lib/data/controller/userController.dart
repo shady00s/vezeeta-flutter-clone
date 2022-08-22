@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vezeeta_clone/data/controller/dioController.dart';
+import 'package:vezeeta_clone/data/model/doctorModel.dart';
+import 'package:vezeeta_clone/data/model/userModel.dart';
 import 'package:vezeeta_clone/presentation/view/pages/doctorAppointmentRegistration.dart';
 
 class UserController {
@@ -13,7 +15,7 @@ class UserController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       prefs.setString('user-token', data.headers.value('user-token')!);
-
+      prefs.setString('userID', data.data['body']['_id']!);
         return true;
     }
     else{
@@ -34,17 +36,30 @@ class UserController {
     }
   }
 
-  Future <bool>showUserAppointments() async {
 
-    Response data = await DioController().userAppointment(doctorID,appointmentData);
 
-    if (data.statusCode == 200) {
-      print(data.data);
-      return true;
+Stream<dynamic>showUserAppointments() async* {
+
+    Response data = await DioController().getUserData();
+
+        UserBody result  = UserBody.fromJson(data.data['body']);
+
+        List<Body> doctors = [];
+    for (var element in result.userAppointments!)  {
+
+      Response  doctorData =   await DioController().getDoctorById(element.doctorID!);
+      Body docData = Body.fromJson(doctorData.data['body']);
+
+      doctors.add(docData);
     }
-    else{
-      return false;
-    }
+
+
+
+
+
+      yield {'userData':result, "doctorData":doctors};
+
+
   }
 
 }

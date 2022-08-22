@@ -1,20 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vezeeta_clone/presentation/view/pages/main-page/main-page.dart';
 
 import '../managers/colorsManager.dart';
 
 class SettingsCard extends StatelessWidget {
-  const SettingsCard( {Key? key,required this.title , required this.icon,required this.targetWidget, this.isGray}  ) : super(key: key);
+  const SettingsCard( {Key? key,required this.title , required this.icon, this.targetWidget, this.isGray}  ) : super(key: key);
   final bool? isGray;
   final String title;
   final IconData icon;
-  final Widget targetWidget;
+  final Widget? targetWidget;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: InkWell(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> targetWidget));
+         targetWidget !=null ? Navigator.push(context, MaterialPageRoute(builder: (context)=> targetWidget!))
+         : showDialog(context: context, builder: (context){
+           return AlertDialog(
+             content:Text('Do you want to log-out?') ,
+             actions: [
+               TextButton(onPressed: () {
+                  SharedPreferences.getInstance().then((value) {
+                    value.remove('userID');
+                    value.remove('user-token');
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainPage()));
+                 });
+
+               }, child: Text('Log out')),
+               TextButton(onPressed: () {
+                 Navigator.pop(context);
+
+               }, child: Text('Cancel'))
+             ],
+           );
+         })
+         ;
         },
         child: Padding(
           padding:  EdgeInsets.all(8.0),

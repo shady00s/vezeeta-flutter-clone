@@ -80,7 +80,7 @@ class ProfilePage extends StatelessWidget {
               children: const [
                 SettingsCard( isGray: true, icon:Icons.star_outline_rounded, title: ' Rate the app', targetWidget: EditProfileScreen(),)
                 ,Divider(),
-                SettingsCard(isGray: true, icon:Icons.logout_rounded, title: ' Logout', targetWidget: EditProfileScreen(),)
+                SettingsCard(isGray: true, icon:Icons.logout_rounded, title: ' Logout',)
 
               ],
             ),

@@ -62,24 +62,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
-             SubmitButtonWidget(onSubmit: (){
+             SubmitButtonWidget(buttonText: "Log in",onSubmit: (){
                UserController()
                    .userLogin(emailController.text,
                    passwordController.text)
                    .then((value) {
-                 if (value == true) {
-                   setState(() {
-                     isLoading = false;
-                   });
+
                    Navigator.push(
                        context,
                        MaterialPageRoute(
                            builder: (context) =>
                            const MainPage()));
-                 }
-               });
-
-             }, buttonText: "Log in")
+                 });
+    })
             ],
           ),
         ));

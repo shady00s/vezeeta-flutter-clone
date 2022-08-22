@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 bool isLoading = false;
 class SubmitButtonWidget extends StatelessWidget {
   const SubmitButtonWidget({Key? key ,required this.onSubmit, required this.buttonText}) : super(key: key);
-  final  Function onSubmit;
+  final  dynamic onSubmit;
   final String buttonText;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,11 @@ class SubmitButtonWidget extends StatelessWidget {
 
                   onSubmit();
 
-                  isLoading = false;
+                        isLoading = false;
+
+
+
+
                 },
                 child:  Text(buttonText)))
             : const Center(child: CircularProgressIndicator()),

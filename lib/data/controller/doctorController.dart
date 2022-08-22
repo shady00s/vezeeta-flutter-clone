@@ -25,7 +25,7 @@ class DoctorController {
   }
 
   Stream<Body> getDoctorData(String doctorID) async* {
-    print("opining doctor profile stream");
+
     try {
       late Body result;
       Response<dynamic> data = await DioController().getDoctorById(doctorID);

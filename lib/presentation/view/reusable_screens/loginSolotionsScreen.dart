@@ -46,52 +46,7 @@ class LoginSolutionScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     const SizedBox(height: 30,),
-                    Card(
-                      color: const Color.fromRGBO(236, 239, 252, 1.0),
-                      child: InkWell(
-                        splashColor: const Color.fromRGBO(137, 154, 229, 0.6588235294117647),
-                        onTap: () {},
-                        child: Row(
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage('assets/fblogo.png'),
-                                width: 33,
-                              ),
-                            ),
-                            Expanded(
-                                child: Text(
-                                  'Facebook',
-                                  textAlign: TextAlign.center,
-                                ))
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      color: const Color.fromRGBO(236, 239, 252, 1.0),
-                      child: InkWell(
-                        splashColor: const Color.fromRGBO(137, 154, 229, 0.6588235294117647),
-                        onTap: () {},
-                        child: Row(
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage('assets/googlelogo.png'),
-                                width: 30,
-                              ),
-                            ),
-                            Expanded(
-                                child: Text(
-                                  'Google',
-                                  textAlign: TextAlign.center,
-                                ))
-                          ],
-                        ),
-                      ),
-                    ),
+
                     Card(
                       color: const Color.fromRGBO(236, 239, 252, 1.0),
                       child: InkWell(

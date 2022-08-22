@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:vezeeta_clone/data/model/doctorModel.dart';
+import 'package:vezeeta_clone/data/model/userModel.dart';
 
 class UserAppointmentCardWidget extends StatelessWidget {
-  const UserAppointmentCardWidget({Key? key}) : super(key: key);
-
+  const UserAppointmentCardWidget({Key? key,required this.doctorData, required this.data})
+      : super(key: key);
+  final UserAppointments data;
+  final Body doctorData;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -12,6 +16,7 @@ class UserAppointmentCardWidget extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 30,
+              backgroundImage: NetworkImage(doctorData.profileImagePath!),
             ),
             SizedBox(
               width: 20,
@@ -26,14 +31,14 @@ class UserAppointmentCardWidget extends StatelessWidget {
                         style: TextStyle(fontSize: 16, color: Colors.black),
                         children: [
                       TextSpan(
-                          text: "sdf",
+                          text: doctorData.doctorName!.englishName!,
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 17,
                               fontWeight: FontWeight.w500))
                     ])),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 RichText(
                     text: TextSpan(
@@ -41,7 +46,7 @@ class UserAppointmentCardWidget extends StatelessWidget {
                         style: TextStyle(fontSize: 16, color: Colors.black),
                         children: [
                       TextSpan(
-                          text: "21 LE",
+                          text: "${ doctorData.fees} LE",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 17,
@@ -50,61 +55,48 @@ class UserAppointmentCardWidget extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                RichText(
-                    text: TextSpan(
-                        text: 'Location  ',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                        children: [
-                      TextSpan(
-                          text: "21 LE",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500))
-                    ])),
+
                 SizedBox(
                   height: 5,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
+
                     RichText(
                         text: TextSpan(
                             text: 'Day  ',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                             children: [
                           TextSpan(
-                              text: "21 LE",
+                              text: data.appointmentDay,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500))
                         ])),
-                    SizedBox(width: 20,),
+                    SizedBox(
+                      height: 5,
+                    ),
                     RichText(
                         text: TextSpan(
                             text: 'Time  ',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                             children: [
                           TextSpan(
-                              text: "21 LE",
+                              text: data.appointmentHour,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500))
                         ]))
-                  ],
-                )
-              ],
-            )
-            ,Spacer(),
-            Align(
-              alignment: AlignmentDirectional.topStart,
-              child: TextButton(onPressed: () {
 
-              },
-              child: Text('Remove'),),
-            )
+              ],
+            ),
+            Spacer(),
+            Stack(alignment: AlignmentDirectional.topStart, children: [
+              TextButton(
+                onPressed: () {},
+                child: Text('Remove'),
+              ),
+            ])
           ],
         ),
       ),

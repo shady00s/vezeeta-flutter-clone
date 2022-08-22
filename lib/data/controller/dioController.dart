@@ -15,7 +15,7 @@ class DioController {
       String doctorSpecializationEnglish, doctorLocation) async {
     print("opining dio");
 
-    return await dio.get(url, queryParameters: {
+    return await dio2.get(url, queryParameters: {
       "page": page,
       "doctorSpecializationEnglish": doctorSpecializationEnglish,
       "doctorLocation": doctorLocation
@@ -24,21 +24,21 @@ class DioController {
 
   Future<Response> getDoctorById(String doctorID) async {
     print("opining doctor profile dio");
-
-    return await dio.get(
+    Response data = await dio2.get(
       '/user-doctor-profile/$doctorID',
     );
+    return data;
   }
 
   Future<Response> userLogIn(String email, password) async {
-    Response data = await dio
+    Response data = await dio2
         .post('/user-login', data: {"userEmail": email, "password": password});
     return data;
   }
 
   Future<Response> userAppointment(
       String doctorID, Data appointmentDetails) async {
-    print(appointmentDetails);
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('user-token') ?? '';
 
@@ -47,7 +47,7 @@ class DioController {
       'Accept': 'application/json',
       'user-token': token
     };
-    print(token);
+
     Response clientData = await dio2.post('/user-add-appointemt/$doctorID',
         data: {
           "userAppointments": {
@@ -62,7 +62,23 @@ class DioController {
         },
         cancelToken: CancelToken());
 
-    print(clientData.statusMessage);
+
+
+    return clientData;
+  }
+  
+  Future<Response> getUserData()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('user-token') ?? '';
+    String userID = prefs.getString('userID')??'';
+    dio2.options.headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+      'user-token': token
+    };
+
+    Response clientData = await dio2.get('/user-profile/$userID');
+
 
     return clientData;
   }
