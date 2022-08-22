@@ -13,6 +13,10 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
+
+  Map<String , dynamic> filter = {
+    
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +34,17 @@ class _FilterScreenState extends State<FilterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                    TextButton(onPressed: (){}, child: Text("Male")),
-                    TextButton(onPressed: (){}, child: Text("Female")),
+                    TextButton(onPressed: (){
+                      setState(() {
+                        filter['doctorGender'] = "male";
+                      });
+
+                    }, child: Text("Male")),
+                    TextButton(onPressed: (){
+                      setState(() {
+                        filter['doctorGender'] = "female";
+                      });
+                    }, child: Text("Female")),
                   ],),
 
 
@@ -43,8 +56,16 @@ class _FilterScreenState extends State<FilterScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextButton(onPressed: (){}, child: Text("Highest to lowest")),
-                  TextButton(onPressed: (){}, child: Text("Lowest to highest")),
+                  TextButton(onPressed: (){
+                    setState(() {
+                      filter['doctorSorting'] = "highestRate";
+                    });
+                  }, child: Text("Highest to lowest")),
+                  TextButton(onPressed: (){
+                    setState(() {
+                      filter['doctorSorting'] = "lowestRate";
+                    });
+                  }, child: Text("Lowest to highest")),
                 ],),
 
               SizedBox(height: 20,),
@@ -55,8 +76,16 @@ class _FilterScreenState extends State<FilterScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextButton(onPressed: (){}, child: Text("Hospital")),
-                  TextButton(onPressed: (){}, child: Text("Clinic")),
+                  TextButton(onPressed: (){
+                    setState(() {
+                      filter['doctorEntity'] = "hospital";
+                    });
+                  }, child: Text("Hospital")),
+                  TextButton(onPressed: (){
+                    setState(() {
+                      filter['doctorEntity'] = "clinic";
+                    });
+                  }, child: Text("Clinic")),
                 ],),
 
               SizedBox(height: 20,),
@@ -64,9 +93,11 @@ class _FilterScreenState extends State<FilterScreen> {
               Divider(),
             Spacer(),
               SubmitButtonWidget(onSubmit: (){
+                print( filter);
+                print(filter['doctorGender']);
                 SharedPreferences.getInstance().then((value) {
                   String city = value.getString("city") ?? '';
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DoctorsListPage(cityName: city ))) ;
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DoctorsListPage(filter:filter,cityName: city ))) ;
 
               });
               }, buttonText: "Filter")

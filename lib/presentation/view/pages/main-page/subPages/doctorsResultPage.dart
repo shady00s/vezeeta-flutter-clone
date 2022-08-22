@@ -19,10 +19,10 @@ int pageNumber = 1;
 
 class DoctorsListPage extends StatefulWidget {
   const DoctorsListPage(
-      {Key? key,  this.cityName})
+      {Key? key,this.filter,  this.cityName})
       : super(key: key);
   final String? cityName;
-
+  final Map<String , dynamic>? filter;
 
 
   @override
@@ -31,11 +31,11 @@ class DoctorsListPage extends StatefulWidget {
 
 class _DoctorsListPageState extends State<DoctorsListPage> {
 
-bool fromLowestToHighest = false;
+
 
   @override
   Widget build(BuildContext context) {
-
+  print(widget.filter);
     return Scaffold(
       body: Column(
         children: [
@@ -260,7 +260,7 @@ bool fromLowestToHighest = false;
 
 
                   return StreamBuilder<List<Body>>(
-                    stream: DoctorController().doctorDataResult(pageNumber ,  getSharedPerefernces() ,widget.cityName!),
+                    stream: DoctorController().doctorDataResult(pageNumber ,  getSharedPerefernces() ,widget.cityName! , widget.filter),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       switch (snapshot.connectionState) {

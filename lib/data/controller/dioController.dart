@@ -12,14 +12,30 @@ class DioController {
       baseUrl: 'http://10.0.2.2:3000', receiveDataWhenStatusError: true));
 
   Future<Response> getDoctors(String url, int page,
-      String doctorSpecializationEnglish, doctorLocation) async {
+      String doctorSpecializationEnglish, doctorLocation ,filter) async {
     print("opining dio");
+    print(filter);
+ if(filter== null || filter == {}) {
+   return await dio2.get(url, queryParameters: {
+     "page": page,
+     "doctorSpecializationEnglish": doctorSpecializationEnglish,
+     "doctorLocation": doctorLocation,
 
-    return await dio2.get(url, queryParameters: {
-      "page": page,
-      "doctorSpecializationEnglish": doctorSpecializationEnglish,
-      "doctorLocation": doctorLocation
-    });
+   }
+   );
+ } else {
+
+   return await dio2.get(url, queryParameters: {
+     "page": page,
+     "doctorSpecializationEnglish": doctorSpecializationEnglish,
+     "doctorLocation": doctorLocation,
+     "doctorGender":filter['doctorGender'],
+     "doctorEntity":filter['doctorEntity'],
+     "doctorSorting":filter["doctorSorting"]
+   }
+   );
+
+ }
   }
 
   Future<Response> getDoctorById(String doctorID) async {

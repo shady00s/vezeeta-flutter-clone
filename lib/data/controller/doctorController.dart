@@ -4,13 +4,13 @@ import '../model/doctorModel.dart';
 import 'dioController.dart';
 
 class DoctorController {
-  Stream<List<Body>> doctorDataResult(int page , Future<String> doctorSpecializationEnglish,String doctorLocation) async* {
+  Stream<List<Body>> doctorDataResult(int page , Future<String> doctorSpecializationEnglish,String doctorLocation , dynamic filter) async* {
     print("opining stream");
     String doc = await doctorSpecializationEnglish;
     try {
       List<Body> result = [];
       Response<dynamic> data =
-          await DioController().getDoctors("/user-doctor-search", page , doc ,doctorLocation);
+          await DioController().getDoctors("/user-doctor-search", page , doc ,doctorLocation, filter);
       print(data.statusMessage);
       print(data.statusCode);
 
