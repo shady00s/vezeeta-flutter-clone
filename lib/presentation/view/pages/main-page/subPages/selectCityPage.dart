@@ -10,7 +10,7 @@ class _Cities{
  _Cities(this.cityName,this.value);
 }
 List<_Cities> _citiesList=[
-    _Cities("All Cities","cairo"),
+
     _Cities("Cairo","cairo"),
     _Cities("Giza","cairo"),
     _Cities("Alexandria","cairo"),

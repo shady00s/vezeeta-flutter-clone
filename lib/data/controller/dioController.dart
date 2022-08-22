@@ -32,7 +32,7 @@ class DioController {
 
   Future<Response> userLogIn(String email, password) async {
     Response data = await dio2
-        .post('/user-login', data: {"userEmail": email, "password": password});
+        .post('/user-login', data: {"userEmail": email, "userPassword": password});
     return data;
   }
 

@@ -25,7 +25,7 @@ class ActivitiesPage extends StatelessWidget {
                 case ConnectionState.none:
 
                 case ConnectionState.waiting:
-                 return Center(child: CircularProgressIndicator(),);
+                 return Expanded(child: Center(child: CircularProgressIndicator(),));
                 case ConnectionState.active:
 
                 case ConnectionState.done:
@@ -39,7 +39,8 @@ class ActivitiesPage extends StatelessWidget {
                     );
                   }
                 else{
-                  return const Center(child: Text('No Activites'),);
+                  
+                  return Expanded(child: const Center(child: Text('No Activites'),));
                   }
 
               }
