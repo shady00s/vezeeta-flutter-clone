@@ -13,6 +13,11 @@ class SearchByNameScreen extends StatefulWidget {
 }
 
 class _SearchByNameScreenState extends State<SearchByNameScreen> {
+  @override
+  void initState() {
+
+    super.initState();
+  }
   TextEditingController search = TextEditingController();
   String textVal = '';
   @override

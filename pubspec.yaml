@@ -41,7 +41,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   cubit: ^0.1.2
   internet_connection_checker: ^0.0.1+4
-  google_maps_flutter: ^2.1.12
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

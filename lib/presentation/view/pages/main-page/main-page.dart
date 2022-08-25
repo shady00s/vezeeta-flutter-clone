@@ -20,6 +20,11 @@ class _MainPageState extends State<MainPage> {
     ProfilePage()
   ];
 
+  @override
+  void initState() {
+
+    super.initState();
+  }
   void _onTapNavigator(int index){
     setState(() {
       indexPage = index;

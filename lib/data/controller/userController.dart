@@ -67,4 +67,18 @@ Stream<dynamic>showUserAppointments() async* {
        return  result.body!;
   }
 
+
+Future<bool> userRegister(Object userData) async{
+    Response data  = await DioController().userReg( userData);
+    if(data.statusCode == 200){
+     UserBody userData =  UserBody.fromJson(data.data['body']);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        prefs.setString('userID', userData.id!);
+      return true;
+    }
+    else{
+      return false;
+    }
+}
 }

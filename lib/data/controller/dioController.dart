@@ -102,8 +102,12 @@ class DioController {
 
   Future<Response> searchByName(String doctorName)async{
      Response data = await dio2.get('/user-doctor-search' ,queryParameters: {"doctorNameEnglish":doctorName});
-      print(data.data);
      return data;
 
+  }
+
+  Future<Response> userReg(Object userData) async{
+    Response data = await dio2.post('/user-register',data: userData);
+    return data;
   }
 }

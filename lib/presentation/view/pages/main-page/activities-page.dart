@@ -18,10 +18,10 @@ class ActivitiesPage extends StatefulWidget {
   State<ActivitiesPage> createState() => _ActivitiesPageState();
 }
 getToken()  async{
-  String result = '';
+
   SharedPreferences prefs =await  SharedPreferences.getInstance();
 
-    print(result);
+
   return prefs.getString('user-token') ??'';
 }
 
@@ -31,7 +31,7 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
 
 @override
   void initState() {
-  getToken();
+    getToken();
     super.initState();
   }
   @override

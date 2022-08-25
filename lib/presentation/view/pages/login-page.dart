@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vezeeta_clone/presentation/view/managers/textStyleManager.dart';
 import 'package:vezeeta_clone/presentation/view/pages/main-page/main-page.dart';
+import 'package:vezeeta_clone/presentation/view/pages/registration-page.dart';
 import 'package:vezeeta_clone/presentation/view/reuseable_widgets/submitButton.dart';
 import 'package:vezeeta_clone/presentation/view/reuseable_widgets/textFormWidget.dart';
 
@@ -62,6 +63,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
+
+             SizedBox(
+
+               child: Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: InkWell(
+                   onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder:(context)=> const RegistrationScreen()));
+                   },
+                   child: RichText(text:
+
+                   const TextSpan(text: "Don't have account?  " ,
+                       style: TextStyle(color: Colors.grey),
+                      children: [TextSpan(text: "Create new account",style:  TextStyle(color:Colors.blue))]
+                   ),),
+                 ),
+               ),
+             ),
+
              SubmitButtonWidget(buttonText: "Log in",onSubmit: (){
                UserController()
                    .userLogin(emailController.text,

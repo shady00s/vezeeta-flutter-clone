@@ -36,6 +36,19 @@ class UserBody {
       userLapAppointment =  (json["userLapAppointment"] as List?)?.map((e) => UserLapAppointment.fromJson(e)).toList();
       v = json['_v' ] as int?;
     }
+  Map<String, dynamic> toJson(){
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['_id']= id;
+    json['userName']= userName;
+    json['userEmail'] =userEmail;
+    json['userPassword'] =userPassword;
+    json['userAge'] =userAge;
+    json['userProfileImagePath'] =userProfileImagePath;
+    json['userAgeDesiease'] =userAgeDesiease;
+    json['userLapAppointment'] =userLapAppointment;
+    json['_v'] =v;
+    return json;
+  }
 
 }
 
