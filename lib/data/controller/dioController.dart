@@ -107,7 +107,22 @@ class DioController {
   }
 
   Future<Response> userReg(Object userData) async{
+
     Response data = await dio2.post('/user-register',data: userData);
     return data;
   }
+
+  Future<Response>userProfile(String userID) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('user-token') ?? '';
+    String userID = prefs.getString('userID')??'';
+    dio2.options.headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+      'user-token': token
+    };
+    Response data = await dio2.get('/user-profile/$userID');
+    return data;
+  }
+
 }

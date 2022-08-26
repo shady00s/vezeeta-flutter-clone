@@ -70,11 +70,13 @@ Stream<dynamic>showUserAppointments() async* {
 
 Future<bool> userRegister(Object userData) async{
     Response data  = await DioController().userReg( userData);
-    if(data.statusCode == 200){
+    print(data.statusCode);
+    if(data.statusCode == 201){
      UserBody userData =  UserBody.fromJson(data.data['body']);
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
         prefs.setString('userID', userData.id!);
+        prefs.setString('token', data.headers.value('user-token')!);
       return true;
     }
     else{
