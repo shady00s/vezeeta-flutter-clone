@@ -21,7 +21,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
   }
   @override
   Widget build(BuildContext context) {
-    print('in doctorDetailPage ${widget.id}');
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Doctor Profile"),

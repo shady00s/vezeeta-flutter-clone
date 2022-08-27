@@ -17,12 +17,12 @@ class ActivitiesPage extends StatefulWidget {
   @override
   State<ActivitiesPage> createState() => _ActivitiesPageState();
 }
-getToken()  async{
+ Future<String> getToken()  async{
 
-  SharedPreferences prefs =await  SharedPreferences.getInstance();
+   SharedPreferences prefs =await SharedPreferences.getInstance();
 
+    return prefs.getString('user-token') ??'';
 
-  return prefs.getString('user-token') ??'';
 }
 
 
@@ -31,118 +31,94 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
 
 @override
   void initState() {
-    getToken();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
 
-    dynamic Auth =   getToken() ;
 
-    return Auth !=''? Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
 
-        children: [
-          Text("My Activity",style: TextStyling.titleStyleText,),
-            StreamBuilder<dynamic>(
-                stream:  UserController().showUserAppointments(),
-                builder: (context,snapshot){
+    return SizedBox(
+        height: MediaQuery.of(context).size.height-10,
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: FutureBuilder<String>(
+          future: getToken(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState){
+              case ConnectionState.none:
 
-              switch(snapshot.connectionState){
-                case ConnectionState.none:
+              case ConnectionState.waiting:
+              return const Center(child: CircularProgressIndicator(),);
+              case ConnectionState.active:
 
-                case ConnectionState.waiting:
-                 return Expanded(child: Center(child: CircularProgressIndicator(),));
-                case ConnectionState.active:
+              case ConnectionState.done:
 
-                case ConnectionState.done:
-                  if(snapshot.hasData){
-                    UserBody? data = snapshot.data['userData'];
-                    List? doctorData =  snapshot.data['doctorData'];
-                    return Expanded(
-                      child: ListView.separated(separatorBuilder:(context,index)=> Divider(), itemCount: data!.userAppointments!.length,  itemBuilder: (context,index){
-                        return   UserAppointmentCardWidget(data: data.userAppointments![index], doctorData: doctorData![index],);
-                      }, ),
-                    );
-                  }
-                else{
+                if(snapshot.hasData){
+                  return Column(
 
-                  return Expanded(child: const Center(child: Text('No Activites'),));
-                  }
-
-              }
-            })
-
-        ],
-      ),
-    ) : Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/mainBackgroundIntro.png'),
-        ),
-      ),
-      child: Stack(
-        alignment:AlignmentDirectional.center,
-        children: [
-
-          Padding(
-            padding: const EdgeInsets.only(top:25.0,left: 10),
-            child: Align(
-              alignment: AlignmentDirectional.topStart,
-              child: IconButton(icon: Icon(Icons.close_rounded),onPressed: (){Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>MainPage()));},),
-            ),
-          ),
-          Positioned(
-            top: MediaQuery.of(context).size.height *0.35,
-            child:SizedBox(
-              height: 300,
-
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  const Text(
-                    'Create account or log in ',
-                    style: TextStyling.titleStyleText,
-                  ),
-                  Text(
-                    'or continue with',
-                    style: TextStyle(fontSize: 13, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 30,),
-
-                  Card(
-                    color: const Color.fromRGBO(236, 239, 252, 1.0),
-                    child: InkWell(
-                      splashColor: const Color.fromRGBO(137, 154, 229, 0.6588235294117647),
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
-                      },
-                      child: Row(
-                        children: const [
-                          Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(Icons.email_outlined,color: ColorManager.lightBlueTextColor,)
-                          ),
-                          Expanded(
-                              child: Text(
-                                'Email',
-                                textAlign: TextAlign.center,
-                              ))
-                        ],
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: const Text("My Activity",style: TextStyle(fontSize: 18 ,fontWeight: FontWeight.w600),),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-            ,
-          )
 
-        ],
-      ),
-    );
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: const Text("Doctor Appointments" ,textAlign: TextAlign.start,style: TextStyle(fontSize: 16, color: Colors.grey,fontWeight: FontWeight.w300),),
+                        ),
+                      ),
+                      FutureBuilder<dynamic>(
+                          future:  UserController().showUserAppointments(),
+                          builder: (context,snapshot){
+
+                            switch(snapshot.connectionState){
+                              case ConnectionState.none:
+
+                              case ConnectionState.waiting:
+                                return const Expanded(child:  Center(child: CircularProgressIndicator(),));
+                              case ConnectionState.active:
+
+                              case ConnectionState.done:
+
+                                if(snapshot.hasData){
+
+                                  UserBody? data = snapshot.data['userData'];
+                                  List? doctorData =  snapshot.data['doctorData'];
+                                  return Expanded(
+                                    child: ListView.separated(separatorBuilder:(context,index)=> const Divider(), itemCount: data!.userAppointments!.length,  itemBuilder: (context,index){
+                                      return   UserAppointmentCardWidget(data: data.userAppointments![index], doctorData: doctorData![index],);
+                                    }, ),
+                                  );
+                                }
+
+                                else{
+
+                                  return const Expanded(child:  Center(child: Text('No Activites')));
+                                }
+
+                            }
+                          })
+
+                    ],
+                  );
+                }
+                else {
+                  WidgetsBinding.instance.addPostFrameCallback((_){
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginSolutionScreen()));
+
+                  });
+                  return Center(child: Text(''));
+                }
+            }
+
+          }
+        ),
+  ),
+      );
   }
 }

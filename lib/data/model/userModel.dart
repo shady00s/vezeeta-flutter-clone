@@ -21,7 +21,7 @@ class UserBody {
    List<String>? userAgeDesiease;
    List <UserLapAppointment>? userLapAppointment;
    int? v;
-
+    String? phoneNumber;
   UserBody({this.userName,this.userAge,this.userAgeDesiease,this.userAppointments,this.userEmail,this.userLapAppointment,this.userPassword,this.userProfileImagePath,this.v});
 
   UserBody.fromJson(Map<String , dynamic> json){
@@ -35,6 +35,7 @@ class UserBody {
       userAgeDesiease = (json["userAgeDesiease"] as List?)?.map((e) => e as String).toList();
       userLapAppointment =  (json["userLapAppointment"] as List?)?.map((e) => UserLapAppointment.fromJson(e)).toList();
       v = json['_v' ] as int?;
+      phoneNumber = json['phoneNumber'] as String ?;
     }
   Map<String, dynamic> toJson(){
     final Map<String, dynamic> json = <String, dynamic>{};
