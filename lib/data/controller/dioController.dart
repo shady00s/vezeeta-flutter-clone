@@ -8,9 +8,9 @@ class DioController {
   Dio dio =
       Dio(BaseOptions(baseUrl: herokuURL, receiveDataWhenStatusError: true));
 
-
-  Dio dio2 = Dio(BaseOptions(
-      baseUrl: 'http://10.0.2.2:3000', receiveDataWhenStatusError: true));
+  //
+  // Dio dio2 = Dio(BaseOptions(
+  //     baseUrl: 'http://10.0.2.2:3000', receiveDataWhenStatusError: true));
 
   Future<Response> getDoctors(String url, int page,
       String doctorSpecializationEnglish, doctorLocation ,filter) async {
@@ -79,13 +79,13 @@ class DioController {
     String token = prefs.getString('user-token') ?? '';
     String userID = prefs.getString('userID')??'';
     print(userID);
-    dio2.options.contentType = 'application/json; charset=UTF-8';
+    dio.options.contentType = 'application/json; charset=UTF-8';
 
-    dio2.options.headers = {
+    dio.options.headers = {
       'Accept': 'application/json',
       'User-Token': token
     };
-    Response clientData = await dio2.post('/user-remove-appointment/$userID',data:{"data":{"userAppointments":appointmentDetails['userAppointments'],"doctorData":appointmentDetails['doctorData']}} ,);
+    Response clientData = await dio.post('/user-remove-appointment/$userID',data:{"data":{"userAppointments":appointmentDetails['userAppointments'],"doctorData":appointmentDetails['doctorData']}} ,);
     return clientData;
 
 
