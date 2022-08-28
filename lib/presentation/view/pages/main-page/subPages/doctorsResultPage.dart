@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vezeeta_clone/presentation/view/reusable_screens/SearchByNameScreen.dart';
 import 'package:vezeeta_clone/presentation/view/reusable_screens/filterScreen.dart';
+import 'package:vezeeta_clone/presentation/view/reusable_screens/splash_screen.dart';
 
 
 
@@ -12,7 +13,7 @@ import '../../../managers/textStyleManager.dart';
 import '../../../reuseable_widgets/doctorCardWidget.dart';
 import 'selectCityPage.dart';
 
-ScrollController _controller = ScrollController();
+
 int pageNumber = 1;
 
 
@@ -30,9 +31,13 @@ class DoctorsListPage extends StatefulWidget {
 }
 
 class _DoctorsListPageState extends State<DoctorsListPage> {
+  final ScrollController _controller = ScrollController();
 
+@override
+  void initState() {
 
-
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
   print(widget.filter);
@@ -267,13 +272,17 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
                         case ConnectionState.none:
 
                         case ConnectionState.waiting:
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+
+                         WidgetsBinding.instance.addPostFrameCallback((_) async {
+                                showDialog(context: context, builder: (context)=>const SplashScreen());
+                            });
+                           return const Text('')  ;
                         case ConnectionState.active:
 
                         case ConnectionState.done:
+
                           if (snapshot.hasData) {
+                            Navigator.pop(context);
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               _controller.addListener(() {
                                 if (_controller.position.pixels >

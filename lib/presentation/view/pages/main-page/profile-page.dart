@@ -4,6 +4,7 @@ import 'package:vezeeta_clone/presentation/view/pages/main-page/subPages/editPro
 import '../../../../data/controller/userController.dart';
 import '../../../../data/model/userModel.dart';
 import '../../reusable_screens/loginSolotionsScreen.dart';
+import '../../reusable_screens/splash_screen.dart';
 import '../../reuseable_widgets/settingsCard.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -18,11 +19,15 @@ class ProfilePage extends StatelessWidget {
           case ConnectionState.none:
 
           case ConnectionState.waiting:
-            return const Center(child:  CircularProgressIndicator(),);
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
+            showDialog(context: context, builder: (context)=>const SplashScreen());
+          });
+          return const Text('') ;
           case ConnectionState.active:
 
           case ConnectionState.done:
             if(snapshot.hasData){
+              Navigator.pop(context);
               return  Column(
                 children: [
                   // name and phone number

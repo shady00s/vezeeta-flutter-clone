@@ -8,6 +8,7 @@ import 'package:vezeeta_clone/presentation/view/pages/main-page/main-page.dart';
 import 'package:vezeeta_clone/presentation/view/reusable_screens/loginSolotionsScreen.dart';
 
 import '../../managers/colorsManager.dart';
+import '../../reusable_screens/splash_screen.dart';
 import '../../reuseable_widgets/userAppointmentCard.dart';
 import '../login-page.dart';
 
@@ -79,13 +80,17 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
                               case ConnectionState.none:
 
                               case ConnectionState.waiting:
+                              WidgetsBinding.instance.addPostFrameCallback((_) async {
+                                showDialog(context: context, builder: (context)=>SplashScreen());
+                              });
+                              return Text('') ;
                                 return const Expanded(child:  Center(child: CircularProgressIndicator(),));
                               case ConnectionState.active:
 
                               case ConnectionState.done:
 
                                 if(snapshot.hasData){
-
+                                  Navigator.pop(context);
                                   UserBody? data = snapshot.data['userData'];
                                   List? doctorData =  snapshot.data['doctorData'];
                                   return Expanded(

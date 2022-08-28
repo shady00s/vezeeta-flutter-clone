@@ -4,6 +4,7 @@ import 'package:vezeeta_clone/presentation/view/managers/textStyleManager.dart';
 import 'package:vezeeta_clone/presentation/view/pages/main-page/subPages/doctorProfilePage.dart';
 
 import '../../../data/controller/userController.dart';
+import '../managers/colorsManager.dart';
 import '../pages/main-page/main-page.dart';
 
 class DoctorInfoAppointmentPopup extends StatelessWidget {
@@ -80,87 +81,103 @@ class DoctorInfoAppointmentPopup extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextButton.icon(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            DoctorProfilePage(id: data['doctorData'].id!)));
-              },
-              icon: const Icon(Icons.account_circle_outlined),
-              label: Text(
-                'View Doctor Profile',
+
+            Expanded(child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: TextButton.icon(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                            (state) => ColorManager.lightBlueBackgroundColor),
+                    foregroundColor: MaterialStateProperty.resolveWith(
+                            (state) => ColorManager.lightBlueTextColor)),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              DoctorProfilePage(id: data['doctorData'].id!)));
+                },
+                icon: const Icon(Icons.account_circle_outlined),
+                label: Text(
+                  'Doctor Profile',
+                ),
               ),
-            ),
-            TextButton.icon(
-              style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.resolveWith((state) => Colors.red)),
-              onPressed: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text(
-                            "Are you want to remove this appointment?"),
-                        actions: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              TextButton.icon(
-                                style: ButtonStyle(
-                                    foregroundColor:
-                                        MaterialStateProperty.resolveWith(
-                                            (state) => Colors.red)),
-                                onPressed: () {
-                                  UserController().removeUserAppointments(
-                                      data['doctorData'].id!, {
-                                    "userAppointments": {
-                                      "doctorID": data['doctorData'].id!,
-                                      "appointmentDay":
-                                          data['userData'].appointmentDay,
-                                      "appointmentHour":
-                                          data['userData'].appointmentHour,
-                                    },
-                                    "doctorData": {
-                                      "clientName": prefs.getString('userName'),
-                                      "clientPhoneNumber":
-                                          prefs.getString('phoneNumber')
-                                    }
-                                  }).then((value) => Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const MainPage())));
-                                },
-                                icon: const Icon(
-                                    Icons.restore_from_trash_outlined),
-                                label: Text(
-                                  'Remove',
+            ),),
+
+            Expanded(child:  Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: TextButton.icon(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                            (state) => ColorManager.lightBlueBackgroundColor),
+                    foregroundColor: MaterialStateProperty.resolveWith(
+                            (state) => ColorManager.lightBlueTextColor)),
+                onPressed: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text(
+                              "Are you want to remove this appointment?"),
+                          actions: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                TextButton.icon(
+                                  style: ButtonStyle(
+                                      foregroundColor:
+                                      MaterialStateProperty.resolveWith(
+                                              (state) => Colors.red)),
+                                  onPressed: () {
+                                    UserController().removeUserAppointments(
+                                        data['doctorData'].id!, {
+                                      "userAppointments": {
+                                        "doctorID": data['doctorData'].id!,
+                                        "appointmentDay":
+                                        data['userData'].appointmentDay,
+                                        "appointmentHour":
+                                        data['userData'].appointmentHour,
+                                      },
+                                      "doctorData": {
+                                        "clientName": prefs.getString('userName'),
+                                        "clientPhoneNumber":
+                                        prefs.getString('phoneNumber')
+                                      }
+                                    }).then((value) => Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                            const MainPage())));
+                                  },
+                                  icon: const Icon(
+                                      Icons.restore_from_trash_outlined),
+                                  label: Text(
+                                    'Remove',
+                                  ),
                                 ),
-                              ),
-                              TextButton.icon(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.exit_to_app_outlined),
-                                label: Text(
-                                  'Cancel',
+                                TextButton.icon(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: const Icon(Icons.exit_to_app_outlined),
+                                  label: Text(
+                                    'Cancel',
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
-                      );
-                    });
-              },
-              icon: const Icon(Icons.restore_from_trash_outlined),
-              label: Text(
-                'Remove',
+                              ],
+                            )
+                          ],
+                        );
+                      });
+                },
+                icon: const Icon(Icons.restore_from_trash_outlined),
+                label: Text(
+                  'Remove',
+                ),
               ),
-            )
+            ))
+
           ],
         )
       ],
