@@ -267,7 +267,7 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
                   return StreamBuilder<List<Body>>(
                     stream: DoctorController().doctorDataResult(pageNumber ,  getSharedPerefernces() ,widget.cityName! , widget.filter),
                     builder: (BuildContext context,
-                        AsyncSnapshot<dynamic> snapshot) {
+                        AsyncSnapshot<List<Body>> snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
 
@@ -281,7 +281,7 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
 
                         case ConnectionState.done:
 
-                          if (snapshot.hasData) {
+                          if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                             Navigator.pop(context);
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               _controller.addListener(() {
@@ -293,12 +293,12 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
                                 }
                               });
                             });
-                            List<Body> data = snapshot.data;
+                            List<Body>? data = snapshot.data;
 
                             return ListView.builder(
                               physics: const BouncingScrollPhysics(),
                                 controller: _controller,
-                                itemCount: data.length,
+                                itemCount: data!.length,
                                 itemBuilder: (context, index) {
                                   return DoctorCardWidget(
                                       doctorData: data[index]);

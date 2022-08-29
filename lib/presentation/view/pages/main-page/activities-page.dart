@@ -81,15 +81,14 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
 
                               case ConnectionState.waiting:
                               WidgetsBinding.instance.addPostFrameCallback((_) async {
-                                showDialog(context: context, builder: (context)=>SplashScreen());
+                                showDialog(context: context, builder: (context)=>const SplashScreen());
                               });
-                              return Text('') ;
-                                return const Expanded(child:  Center(child: CircularProgressIndicator(),));
+                              return const Text('') ;
                               case ConnectionState.active:
 
                               case ConnectionState.done:
 
-                                if(snapshot.hasData){
+                                if(snapshot.hasData && snapshot.data!.isNotEmpty){
                                   Navigator.pop(context);
                                   UserBody? data = snapshot.data['userData'];
                                   List? doctorData =  snapshot.data['doctorData'];
@@ -101,7 +100,6 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
                                 }
 
                                 else{
-
                                   return const Expanded(child:  Center(child: Text('No Activites')));
                                 }
 
@@ -117,7 +115,7 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginSolutionScreen()));
 
                   });
-                  return Center(child: Text(''));
+                  return const Center(child: Text('No Activites'));
                 }
             }
 
