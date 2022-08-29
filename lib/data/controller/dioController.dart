@@ -85,7 +85,9 @@ class DioController {
       'Accept': 'application/json',
       'User-Token': token
     };
-    Response clientData = await dio.post('/user-remove-appointment/$userID',data:{"data":{"userAppointments":appointmentDetails['userAppointments'],"doctorData":appointmentDetails['doctorData']}} ,);
+    Response clientData = await dio.post('/user-remove-appointment/$userID'
+      ,data:{
+      "data":{"userAppointments":appointmentDetails['userAppointments'],"doctorData":appointmentDetails['doctorData']}} ,);
     return clientData;
 
 
@@ -135,7 +137,7 @@ class DioController {
     return data;
   }
   
-  Future<Response>userEditProfile(Object editData )async{
+  Future<Response>userEditProfile(Map<String,dynamic> editData )async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('user-token') ?? '';
     String userID = prefs.getString('userID')??'';

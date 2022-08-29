@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:  [
                           Text("Welcome to vezeeta! ${snapshot.data!.userName}"),
-                          Text("+20 01289344552")
+                          Text("+20 ${snapshot.data!.phoneNumber}")
                         ],
                       ),
                     )
@@ -57,12 +57,12 @@ class ProfilePage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          SettingsCard(icon:Icons.account_circle_outlined, title: ' My Account', targetWidget: EditProfileScreen(),)
-                          ,Divider(),
-                          SettingsCard(icon:Icons.heart_broken, title: ' Favorites', targetWidget: EditProfileScreen(),)
-                          ,Divider(),
-                          SettingsCard(icon:Icons.stars_rounded, title: ' Vezeeta Points', targetWidget: EditProfileScreen(),)
+                        children:  [
+                          SettingsCard(icon:Icons.account_circle_outlined, title: ' My Account', targetWidget: EditProfileScreen(phoneNumber: snapshot.data!.phoneNumber!, userEmail:snapshot.data!.userEmail!, userName: snapshot.data!.userName!,),)
+                          , const  Divider(),
+                          const   SettingsCard(icon:Icons.heart_broken, title: ' Favorites',) ,
+                          const  Divider(),
+                          const  SettingsCard(icon:Icons.stars_rounded, title: ' Vezeeta Points')
                         ],
                       ),
                     )
@@ -78,9 +78,9 @@ class ProfilePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          SettingsCard(icon:Icons.headset_mic_outlined, title: ' Support', targetWidget: EditProfileScreen(),)
+                          SettingsCard(icon:Icons.headset_mic_outlined, title: ' Support', )
                           ,Divider(),
-                          SettingsCard(icon:Icons.settings, title: ' Settings', targetWidget: EditProfileScreen(),)
+                          SettingsCard(icon:Icons.settings, title: ' Settings')
 
                         ],
                       ),
@@ -98,7 +98,7 @@ class ProfilePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          SettingsCard( isGray: true, icon:Icons.star_outline_rounded, title: ' Rate the app', targetWidget: EditProfileScreen(),)
+                          SettingsCard( isGray: true, icon:Icons.star_outline_rounded, title: ' Rate the app')
                           ,Divider(),
                           SettingsCard(isGray: true, icon:Icons.logout_rounded, title: ' Logout',)
 

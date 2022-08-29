@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vezeeta_clone/data/model/userModel.dart';
 import 'package:vezeeta_clone/presentation/view/managers/colorsManager.dart';
 import 'package:vezeeta_clone/presentation/view/pages/login-page.dart';
 
@@ -29,6 +28,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   // controllers
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController   confirmPassword = TextEditingController();
 
@@ -101,6 +101,17 @@ ClientGender  _gender = ClientGender.male;
                       prefixIcon: Icons.email_outlined,
                       controller: emailController,
                       inputType: TextInputType.emailAddress),
+                  // phone number
+                  const Text(
+                    "Enter your Phone Number:",
+                    style: TextStyling.titleStyleText,
+                    textAlign: TextAlign.start,
+                  ),
+                  TextFormWidget(
+                      hintText: 'Phone Number',
+                      prefixIcon: Icons.email_outlined,
+                      controller: phoneNumberController,
+                      inputType: TextInputType.number),
 
                   // password
                   const Text(
@@ -267,6 +278,7 @@ ClientGender  _gender = ClientGender.male;
                               "userEmail":emailController.text,
                               "userPassword":passwordController.text,
                               "userAge":"21",
+                              "phoneNumber":phoneNumberController.text,
                               "userProfileImagePath":value
 
                             })

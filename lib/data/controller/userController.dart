@@ -89,8 +89,8 @@ Future<bool> userRegister(Object userData) async{
 
         prefs.setString('userID', userData.id!);
         prefs.setString('user-token', data.headers.value('user-token')!);
-     prefs.setString('userName', userData.userName!);
-     prefs.setString('phoneNumber', userData.phoneNumber!);
+        prefs.setString('userName', userData.userName!);
+        prefs.setString('phoneNumber', userData.phoneNumber!);
       return true;
     }
     else{
@@ -104,5 +104,20 @@ Future<UserBody> userProfileData() async{
     UserBody userData = UserBody.fromJson(data.data['body']);
 
     return userData;
+}
+
+Future <bool> userEdit(Map<String,dynamic> editData) async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+    Response data = await DioController().userEditProfile(editData);
+    if(data.statusCode == 200){
+      prefs.setString('phoneNumber', data.data['body']['phoneNumber']);
+      prefs.setString('userName', data.data['body']['userName']);
+
+
+      return true;
+    }
+    else{
+      return false;
+    }
 }
 }

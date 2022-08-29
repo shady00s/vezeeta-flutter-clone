@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vezeeta_clone/presentation/view/managers/colorsManager.dart';
 import 'package:vezeeta_clone/presentation/view/reuseable_widgets/submitButton.dart';
 import 'package:vezeeta_clone/presentation/view/reuseable_widgets/textFormWidget.dart';
@@ -38,6 +39,16 @@ class _DoctorAppointmentRegistrationScreenState
     extends State<DoctorAppointmentRegistrationScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
+  @override
+  void initState() {
+   SharedPreferences.getInstance().then((value) {
+     setState(() {
+       name.text = value.getString('userName')??'';
+       phoneNumber.text = value.getString('phoneNumber')??'';
+     });
+   });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
